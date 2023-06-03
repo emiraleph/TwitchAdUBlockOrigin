@@ -488,8 +488,8 @@ twitch-videoad.js text/javascript
                     var proxyType = TwitchAdblockSettings.ProxyType ? TwitchAdblockSettings.ProxyType : DefaultProxyType;
                     var encodingsM3u8Response = null;
                     switch (proxyType) {
-                        case 'TTV LOL':
-                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'X-Donate-To': 'https://ttv.lol/donate'}});
+                        case 'uwu':
+                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'uwu': ''}});
                             break;
                         case 'Falan':
                             encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8?allow_source=true');
