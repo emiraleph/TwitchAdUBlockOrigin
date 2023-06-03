@@ -2,33 +2,43 @@
 //This code is designed to be used in conjunction with uBlock Origin
 //And additionally it has no external links to ensure the security of users
 (function() {
-    if ( /(^|\.)twitch\.tv$/.test(document.location.hostname) === false ) { return; }
+    // Check if we are on the Twitch domain
+    if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
+        return; // Exit the function if we are not on Twitch
+    }
     try {
+        // Configure the 'visibilityState' property of the document
         Object.defineProperty(document, 'visibilityState', {
             get() {
                 return 'visible';
             }
         });
+        // Configure the 'hidden' property of the document
         Object.defineProperty(document, 'hidden', {
             get() {
                 return false;
             }
         });
+        // Block events to prevent ad playback
         const block = e => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
         };
+        // Process events for specific tasks
         const process = e => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
+            // Perform the specific task on the Twitch player
             doTwitchPlayerTask(false, false, true, false, false);
         };
+        // Add blocking to events related to document visibility
         document.addEventListener('visibilitychange', block, true);
         document.addEventListener('webkitvisibilitychange', block, true);
         document.addEventListener('mozvisibilitychange', block, true);
         document.addEventListener('hasFocus', block, true);
+        // Configure the 'mozHidden' or 'webkitHidden' property based on the browser
         if (/Firefox/.test(navigator.userAgent)) {
             Object.defineProperty(document, 'mozHidden', {
                 get() {
@@ -96,6 +106,7 @@
                 super(twitchBlobUrl);
                 return;
             }
+            // Injected functions
             var newBlobStr = `
                 ${getStreamUrlForResolution.toString()}
                 ${getStreamForResolution.toString()}
@@ -130,8 +141,12 @@
                 hookWorkerFetch();
                 importScripts('${jsURL}');
             `;
+
+             // Create a new blob URL with the modified code
             super(URL.createObjectURL(new Blob([newBlobStr])));
+             // Set twitchMainWorker to the current instance
             twitchMainWorker = this;
+            // Handle message events for displaying/hiding ad block banner
             this.onmessage = function(e) {
                 if (e.data.key == 'ShowAdBlockBanner') {
                     if (!TwitchAdblockSettings.BannerVisible) {
@@ -140,7 +155,7 @@
                     if (adBlockDiv == null) {
                         adBlockDiv = getAdBlockDiv();
                     }
-                    adBlockDiv.P.textContent = 'Blocking ads uwu';
+                    adBlockDiv.P.textContent = 'Blocking ads';
                     adBlockDiv.style.display = 'block';
                 } else if (e.data.key == 'HideAdBlockBanner') {
                     if (adBlockDiv == null) {
@@ -404,7 +419,7 @@
         }
         if (streamInfo.EncodingsM3U8Cache[playerType].Resolution != resolutionInfo.Resolution ||
             streamInfo.EncodingsM3U8Cache[playerType].RequestTime < Date.now() - EncodingCacheTimeout) {
-            console.log(`Blocking ads (type:${playerType}, resolution:${resolutionInfo.Resolution}, frameRate:${resolutionInfo.FrameRate}, qualityOverride:${qualityOverride})`);
+            console.log(`Blocking ads uwu(type:${playerType}, resolution:${resolutionInfo.Resolution}, frameRate:${resolutionInfo.FrameRate}, qualityOverride:${qualityOverride})`);
         }
         streamInfo.EncodingsM3U8Cache[playerType].RequestTime = Date.now();
         streamInfo.EncodingsM3U8Cache[playerType].Value = encodingsM3u8;
@@ -433,7 +448,7 @@
         if (!params) {
             params = [ 'token', 'sig' ];
         }
-        var tempUrl = new URL('https://localhost/' + str);
+        var tempUrl = new URL('' + str);
         for (var i = 0; i < params.length; i++) {
             tempUrl.searchParams.delete(params[i]);
         }
@@ -490,10 +505,10 @@
                     var proxyType = TwitchAdblockSettings.ProxyType ? TwitchAdblockSettings.ProxyType : DefaultProxyType;
                     var encodingsM3u8Response = null;
                     switch (proxyType) {
-                        case 'uwu':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'uwu': ''}});
+                        case '1':
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'':''}});
                             break;
-                        case 'Falan':
+                        case '2':
                             encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8?allow_source=true');
                             break;
                     }
@@ -523,7 +538,7 @@
             }
         } else {
             if (WasShowingAd) {
-                console.log('Finished blocking ads uwu');
+                console.log('Finished blocking ads');
                 WasShowingAd = false;
                 postMessage({
                     key: 'ForceChangeQuality',
@@ -553,8 +568,11 @@
             }));
     }
     async function tryNotifyTwitch(streamM3u8) {
+        // Match the stitched ad in the streamM3u8 string
         var matches = streamM3u8.match(/#EXT-X-DATERANGE:(ID="stitched-ad-[^\n]+)\n/);
+        // Check if there is a match
         if (matches.length > 1) {
+            // Extract relevant attributes from the matched string
                 const attrString = matches[1];
                 const attr = parseAttributes(attrString);
                 var podLength = parseInt(attr['X-TV-TWITCH-AD-POD-LENGTH'] ? attr['X-TV-TWITCH-AD-POD-LENGTH'] : '1');
@@ -565,13 +583,18 @@
                 var creativeId = attr['X-TV-TWITCH-AD-CREATIVE-ID'];
                 var adId = attr['X-TV-TWITCH-AD-ADVERTISER-ID'];
                 var rollType = attr['X-TV-TWITCH-AD-ROLL-TYPE'].toLowerCase();
+
+                 // Create a base data object with the extracted attributes
                 const baseData = {
                     stitched: true,
                     roll_type: rollType,
                     player_mute: true,
                     player_volume: 0.0,
                     visible: false,
+                    // Additional attributes can be added here
             };
+            // Perform further actions with the baseData object
+            // ...
             for (let podPosition = 0; podPosition < podLength; podPosition++) {
                 const extendedData = {
                     ...baseData,
@@ -642,7 +665,7 @@
                 GQLDeviceID += dcharacters.charAt(Math.floor(Math.random() * dcharactersLength));
             }
         }
-        return fetchFunc('https://gql.twitch.tv/gql', {
+        return fetchFunc('', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
