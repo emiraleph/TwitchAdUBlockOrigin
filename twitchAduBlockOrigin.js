@@ -1,3 +1,6 @@
+//Twitch.tv AD blocker modiffied by Emir
+//This code is designed to be used in conjunction with uBlock Origin
+//And additionally it has no external links to ensure the security of users
 (function() {
     if ( /(^|\.)twitch\.tv$/.test(document.location.hostname) === false ) { return; }
     try {
@@ -137,7 +140,7 @@
                     if (adBlockDiv == null) {
                         adBlockDiv = getAdBlockDiv();
                     }
-                    adBlockDiv.P.textContent = 'Blocking ads';
+                    adBlockDiv.P.textContent = 'Blocking ads uwu';
                     adBlockDiv.style.display = 'block';
                 } else if (e.data.key == 'HideAdBlockBanner') {
                     if (adBlockDiv == null) {
