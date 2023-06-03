@@ -1,4 +1,3 @@
-twitch-videoad.js text/javascript
 (function() {
     if ( /(^|\.)twitch\.tv$/.test(document.location.hostname) === false ) { return; }
     try {
@@ -489,10 +488,10 @@ twitch-videoad.js text/javascript
                     var encodingsM3u8Response = null;
                     switch (proxyType) {
                         case 'uwu':
-                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'uwu': ''}});
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'uwu': ''}});
                             break;
                         case 'Falan':
-                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8?allow_source=true');
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8?allow_source=true');
                             break;
                     }
                     if (encodingsM3u8Response && encodingsM3u8Response.status === 200) {
@@ -505,7 +504,7 @@ twitch-videoad.js text/javascript
             if (accessTokenResponse.status === 200) {
                 var accessToken = await accessTokenResponse.json();
                 try {
-                    var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + CurrentChannelName + '.m3u8' + UsherParams);
+                    var urlInfo = new URL('' + CurrentChannelName + '.m3u8' + UsherParams);
                     urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                     urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                     var encodingsM3u8Response = await realFetch(urlInfo.href);
@@ -521,7 +520,7 @@ twitch-videoad.js text/javascript
             }
         } else {
             if (WasShowingAd) {
-                console.log('Finished blocking ads');
+                console.log('Finished blocking ads uwu');
                 WasShowingAd = false;
                 postMessage({
                     key: 'ForceChangeQuality',
