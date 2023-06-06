@@ -13,8 +13,11 @@ Enjoy your favorite Twitch streams without annoying ads and have greater control
 
 ## Mandatory Requirements
 
-- Install uBlock Origin: Make sure you have the uBlock Origin extension installed in your browser.
-- Enable ad blocking for Twitch: Within uBlock Origin, activate the ad blocking feature specifically for Twitch using the corresponding key.
+- Install [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin) from the official site.
+- Enable in the section my filters the rule that activates the blocking of twitch ads:
+- Just copy and paste the key into the ublock origin console.
+- `twitch.tv##+js(twitch-videoad)`
+
 
 ## Installation
 
