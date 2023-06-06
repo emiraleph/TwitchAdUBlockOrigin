@@ -1,5 +1,6 @@
 # ENGLISH
-# Offline Ad Blocker for Twitch
+# Offline Ad Blocker for Twitch [adsFree]<img src="twitchNoAds.png" alt="adsFree" width="300" height="200">
+
 
 This project is an offline ad blocker for Twitch that has been modified from another project. The modified version is designed to provide an ad-free browsing experience locally and with enhanced privacy. Unlike other ad blockers, this one specifically targets Twitch and does not affect other web pages.
 Enjoy your favorite Twitch streams without annoying ads and have greater control over your privacy.
