@@ -1,3 +1,4 @@
+<img alt="GitHub followers" src="https://img.shields.io/github/followers/emiraleph?style=social"> <img alt="GitHub" src="https://img.shields.io/github/license/emiraleph/TwitchAdUBlockOrigin?color=%23FF0000&label=License&logo=license"> [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/pixeltris/TwitchAdSolutions?color=%2300FF00&label=Original%20Project&logo=github)](https://github.com/pixeltris/TwitchAdSolutions) 
 # ENGLISH
 # Local Ad Blocker for Twitch <img src="uBOTwitch.png" align="right" width="128px"/>
 
