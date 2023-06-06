@@ -42,7 +42,9 @@ And save the changes in both sections.
 
 For further customization and additional features, you can refer to the [additionalTweaks](additionalTweaks) file in the repository. This file contains various keys that can be added to the `My Filters` section of uBlock Origin settings. These keys allow you to remove the `Twitch Turbo` button and achieve a cleaner and ad-free appearance.
 
-Feel free to explore the [additionalTweaks](additionalTweaks) file and customize your Twitch ad-blocking experience according to your preferences.
+Additionally, uBlock Origin provides a convenient feature where you can manually select and block specific elements by right-clicking and using the uBlock Origin shortcut. This gives you the flexibility to add or block elements according to your preferences.
+
+Feel free to explore the [additionalTweaks](additionalTweaks) file and customize your Twitch ad-blocking experience.
 
 #
 # ESPAÑOL
@@ -80,3 +82,9 @@ Una vez realizados estos pasos, el bloqueador de anuncios para Twitch estará in
 
 Si deseas desactivar el script puedes volver a poner en `'unset'` la regla `'userResourcesLocation'` y opcionalmente remover el parámetro `'twitch.tv##+js(twitch-videoad)'` de la sección "Mis Filtros".
 Y guarda los cambios de ambas secciones.
+
+Para una mayor personalización y características adicionales, puedes consultar el archivo [additionalTweaks](additionalTweaks) en el repositorio. Este archivo contiene varias reglas que se pueden agregar a la sección "Mis filtros" de la configuración de uBlock Origin. Estas reglas te permiten eliminar el botón "Twitch Turbo" y lograr una apariencia más limpia y libre de anuncios.
+
+Además, uBlock Origin proporciona una función conveniente donde puedes seleccionar y bloquear manualmente elementos específicos haciendo clic derecho y utilizando el atajo de uBlock Origin. Esto te brinda la flexibilidad de agregar o bloquear elementos según tus preferencias.
+
+Siéntete libre de explorar el archivo [additionalTweaks](additionalTweaks) y personalizar tu experiencia de bloqueo de anuncios en Twitch.
