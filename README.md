@@ -2,7 +2,7 @@
 # Local Ad Blocker for Twitch <img src="uBOTwitch.png" align="right" width="128px"/>
 
 
-This project is an offline ad blocker for Twitch that has been modified from another project. The modified version is designed to provide an ad-free browsing experience locally and with enhanced privacy. Unlike other ad blockers, this one specifically targets Twitch and does not affect other web pages.
+This project is an local ad blocker for Twitch that has been modified from another project. The modified version is designed to provide an ad-free browsing experience locally and with enhanced privacy. Unlike other ad blockers, this one specifically targets Twitch and does not affect other web pages.
 Enjoy your favorite Twitch streams without annoying ads and have greater control over your privacy.
 
 ## Features
@@ -35,7 +35,10 @@ Enjoy your favorite Twitch streams without annoying ads and have greater control
 
 Once these steps are completed, the ad blocker for Twitch will be installed in your browser and ready to use.
 
+If you want to disable the script, you can set the `userResourcesLocation` rule back to `unset` and optionally remove the `twitch.tv##+js(twitch-videoad)` parameter from the "My Filters" section.
+And save the changes in both sections.
 
+#
 # ESPAÑOL
 # Bloqueador de Anuncios Local para Twitch
 
@@ -68,3 +71,6 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 10. Guarda los cambios.
 
 Una vez realizados estos pasos, el bloqueador de anuncios para Twitch estará instalado en el navegador y listo para funcionar.
+
+Si deseas desactivar el script puedes volver a poner en `'unset'` la regla `'userResourcesLocation'` y opcionalmente remover el parámetro `'twitch.tv##+js(twitch-videoad)'` de la sección "Mis Filtros".
+Y guarda los cambios de ambas secciones.
