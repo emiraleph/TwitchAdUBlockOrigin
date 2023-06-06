@@ -1,5 +1,5 @@
 # ENGLISH
-# Offline Ad Blocker for Twitch <img src="uBOTwitch.png" align="right" width="128px"/>
+# Local Ad Blocker for Twitch <img src="uBOTwitch.png" align="right" width="128px"/>
 
 
 This project is an offline ad blocker for Twitch that has been modified from another project. The modified version is designed to provide an ad-free browsing experience locally and with enhanced privacy. Unlike other ad blockers, this one specifically targets Twitch and does not affect other web pages.
@@ -37,7 +37,7 @@ Once these steps are completed, the ad blocker for Twitch will be installed in y
 
 
 # ESPAÑOL
-# Bloqueador de Anuncios Offline para Twitch
+# Bloqueador de Anuncios Local para Twitch
 
 Este proyecto es un bloqueador de anuncios local (No se conecta a enlaces ni scripts externos) para Twitch que ha sido modificado a partir de otro proyecto. La versión modificada está diseñada para ofrecer una experiencia de navegación sin anuncios de manera local y con mayor privacidad. A diferencia de otros bloqueadores de anuncios, este se enfoca exclusivamente en Twitch y no afecta a otras páginas web. 
 Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y con mayor control sobre tu privacidad.
