@@ -1,4 +1,4 @@
-<img alt="Mozilla Add-on" src="https://img.shields.io/amo/v/ublock-origin?color=%23990000&label=uBlock%20Origin&logo=ublock-origin&logoColor=%23FFFFFF"> <img alt="GitHub" src="https://img.shields.io/github/license/emiraleph/TwitchAdUBlockOrigin?color=%23FF0000&label=License&logo=license"> 
+<img alt="Mozilla Add-on" src="https://img.shields.io/amo/v/ublock-origin?color=%23990000&label=uBlock%20Origin&logo=ublock-origin&logoColor=%23FFFFFF"> <img alt="GitHub" src="https://img.shields.io/github/license/emiraleph/TwitchAdUBlockOrigin?color=%23FF0000&label=License&logo=license"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/emiraleph/TwitchAdUBlockOrigin">
 
 <!-- [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/pixeltris/TwitchAdSolutions?color=%2300FF00&label=Original%20Project&logo=github)](https://github.com/pixeltris/TwitchAdSolutions) -->
 # ENGLISH
