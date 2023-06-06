@@ -1,2 +1,66 @@
-This is just a clone of a project by 'pixeltris' that I host personally for more control of the code and possibly add improvements later.
-If you want to use it go ahead :uwu:
+# ENGLISH
+# Offline Ad Blocker for Twitch
+
+This project is an offline ad blocker for Twitch that has been modified from another project. The modified version is designed to provide an ad-free browsing experience locally and with enhanced privacy. Unlike other ad blockers, this one specifically targets Twitch and does not affect other web pages.
+Enjoy your favorite Twitch streams without annoying ads and have greater control over your privacy.
+
+## Features
+
+- No external connections: The ad blocker works locally within your browser and does not make any external connections.
+- No additional codes or encrypted links: The project is transparent and does not contain any additional codes or encrypted links.
+- Open source: The source code is openly available, allowing you to contribute or make modifications according to your needs.
+- Compatible with Firefox and LibreWolf: The ad blocker is compatible with Firefox and LibreWolf browsers.
+
+## Mandatory Requirements
+
+- Install uBlock Origin: Make sure you have the uBlock Origin extension installed in your browser.
+- Enable ad blocking for Twitch: Within uBlock Origin, activate the ad blocking feature specifically for Twitch using the corresponding key.
+
+## Installation
+
+1. Open the 'twitchAduBlockOrigin.js' file on GitHub.
+2. Click the "Raw" button.
+3. Copy the link from the new window displaying the code.
+4. Open your browser and access the uBlock Origin settings.
+5. Go to the advanced configuration section.
+6. Ensure that the "I am an advanced user" option is enabled.
+7. Click the configuration button.
+8. Locate the 'userResourcesLocation' key, which is set to "unset" by default.
+9. Replace 'unset' with the link to the copied code.
+10. Save the changes.
+
+Once these steps are completed, the ad blocker for Twitch will be installed in your browser and ready to use.
+
+
+# ESPAÑOL
+# Bloqueador de Anuncios Offline para Twitch
+
+Este proyecto es un bloqueador de anuncios local (No se conecta a enlaces ni scripts externos) para Twitch que ha sido modificado a partir de otro proyecto. La versión modificada está diseñada para ofrecer una experiencia de navegación sin anuncios de manera local y con mayor privacidad. A diferencia de otros bloqueadores de anuncios, este se enfoca exclusivamente en Twitch y no afecta a otras páginas web. 
+Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y con mayor control sobre tu privacidad.
+
+## Características
+
+- No se conecta a enlaces externos: El bloqueador de anuncios funciona localmente en tu navegador y no realiza ninguna conexión externa.
+- Sin códigos adicionales o enlaces encriptados: El proyecto es transparente y no contiene ningún código adicional ni enlaces encriptados.
+- Open source: El código fuente está disponible de forma abierta y puedes contribuir o realizar modificaciones según tus necesidades.
+- Compatible con Firefox y LibreWolf: El bloqueador de anuncios es compatible con los navegadores Firefox y LibreWolf.
+
+## Requerimientos obligatorios
+
+- Tener instalado uBlock Origin: Asegúrate de tener instalada la extensión uBlock Origin en tu navegador.
+- Activar el bloqueo de anuncios para Twitch: Dentro de uBlock Origin, activa la función de bloqueo de anuncios específica para Twitch utilizando la clave correspondiente.
+
+## Instalación
+
+1. Abre el archivo 'twitchAduBlockOrigin.js' en GitHub.
+2. Haz clic en el botón "Raw".
+3. Copia el enlace de la nueva ventana que muestra el código.
+4. Abre tu navegador y accede a la configuración de uBlock Origin.
+5. Ve a la sección de configuración avanzada.
+6. Asegúrate de tener habilitada la opción "Soy un usuario avanzado".
+7. Haz clic en el botón de configuración.
+8. Busca la clave 'userResourcesLocation', que por defecto está configurada como "unset".
+9. Reemplaza 'unset' con el enlace al código que copiaste anteriormente.
+10. Guarda los cambios.
+
+Una vez realizados estos pasos, el bloqueador de anuncios para Twitch estará instalado en el navegador y listo para funcionar.
