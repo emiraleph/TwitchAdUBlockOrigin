@@ -40,7 +40,7 @@ And save the changes in both sections.
 
 ## Additional Tweaks
 
-For further customization and additional features, you can refer to the [additionalTweaks](additionalTweaks) file in the repository. This file contains various keys that can be added to the "My Filters" section of uBlock Origin. These keys allow you to remove the Twitch Turbo button and achieve a cleaner and ad-free appearance.
+For further customization and additional features, you can refer to the [additionalTweaks](additionalTweaks) file in the repository. This file contains various keys that can be added to the `My Filters` section of uBlock Origin settings. These keys allow you to remove the `Twitch Turbo` button and achieve a cleaner and ad-free appearance.
 
 Feel free to explore the [additionalTweaks](additionalTweaks) file and customize your Twitch ad-blocking experience according to your preferences.
 
