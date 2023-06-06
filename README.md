@@ -38,6 +38,12 @@ Once these steps are completed, the ad blocker for Twitch will be installed in y
 If you want to disable the script, you can set the `userResourcesLocation` rule back to `unset` and optionally remove the `twitch.tv##+js(twitch-videoad)` parameter from the "My Filters" section.
 And save the changes in both sections.
 
+## Additional Tweaks
+
+For further customization and additional features, you can refer to the [additionalTweaks](additionalTweaks) file in the repository. This file contains various keys that can be added to the "My Filters" section of uBlock Origin. These keys allow you to remove the Twitch Turbo button and achieve a cleaner and ad-free appearance.
+
+Feel free to explore the [additionalTweaks](additionalTweaks) file and customize your Twitch ad-blocking experience according to your preferences.
+
 #
 # ESPAÑOL
 # Bloqueador de Anuncios Local para Twitch
