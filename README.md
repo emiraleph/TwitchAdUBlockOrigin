@@ -18,7 +18,7 @@ Enjoy your favorite Twitch streams without annoying ads and have greater control
 ## Mandatory Requirements
 
 - Install [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin) from the official site.
-- Enable in the section my filters the rule that activates the blocking of twitch ads:
+- Enable in the section `"my filters"` the rule that activates the blocking of twitch ads:
 - Just copy and paste the key into the ublock origin console.
 - `twitch.tv##+js(twitch-videoad)`
 
@@ -67,7 +67,7 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 ## Requisitos Obligatorios
 
 - Instala [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin) desde el sitio oficial.
-- Habilita en la sección "mis filtros" la regla que activa el bloqueo de anuncios en Twitch:
+- Habilita en la sección `"mis filtros"` la regla que activa el bloqueo de anuncios en Twitch:
 - Solo copia y pega la clave en la consola de uBlock Origin.
 - `twitch.tv##+js(twitch-videoad)`
 
