@@ -25,15 +25,15 @@ Enjoy your favorite Twitch streams without annoying ads and have greater control
 
 ## Installation
 
-1. Open the 'twitchAduBlockOrigin.js' file on GitHub.
-2. Click the "Raw" button.
+1. Open the `twitchAduBlockOrigin.js` file on GitHub.
+2. Click the `Raw` button.
 3. Copy the link from the new window displaying the code.
 4. Open your browser and access the uBlock Origin settings.
 5. Go to the advanced configuration section.
-6. Ensure that the "I am an advanced user" option is enabled.
+6. Ensure that the `I am an advanced user` option is enabled.
 7. Click the configuration button.
-8. Locate the 'userResourcesLocation' key, which is set to "unset" by default.
-9. Replace 'unset' with the link to the copied code.
+8. Locate the `userResourcesLocation` key, which is set to `unset` by default.
+9. Replace `unset` with the link to the copied code.
 10. Save the changes.
 
 Once these steps are completed, the ad blocker for Twitch will be installed in your browser and ready to use.
@@ -64,27 +64,29 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 - Open source: El código fuente está disponible de forma abierta y puedes contribuir o realizar modificaciones según tus necesidades.
 - Compatible con Firefox y LibreWolf: El bloqueador de anuncios es compatible con los navegadores Firefox y LibreWolf.
 
-## Requerimientos obligatorios
+## Requisitos Obligatorios
 
-- Tener instalado uBlock Origin: Asegúrate de tener instalada la extensión uBlock Origin en tu navegador.
-- Activar el bloqueo de anuncios para Twitch: Dentro de uBlock Origin, activa la función de bloqueo de anuncios específica para Twitch utilizando la clave correspondiente.
+- Instala [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin) desde el sitio oficial.
+- Habilita en la sección "mis filtros" la regla que activa el bloqueo de anuncios en Twitch:
+- Solo copia y pega la clave en la consola de uBlock Origin.
+- `twitch.tv##+js(twitch-videoad)`
 
 ## Instalación
 
-1. Abre el archivo 'twitchAduBlockOrigin.js' en GitHub.
-2. Haz clic en el botón "Raw".
+1. Abre el archivo `twitchAduBlockOrigin.js` en GitHub.
+2. Haz clic en el botón `Raw`
 3. Copia el enlace de la nueva ventana que muestra el código.
 4. Abre tu navegador y accede a la configuración de uBlock Origin.
 5. Ve a la sección de configuración avanzada.
-6. Asegúrate de tener habilitada la opción "Soy un usuario avanzado".
+6. Asegúrate de tener habilitada la opción `Soy un usuario avanzado`.
 7. Haz clic en el botón de configuración.
-8. Busca la clave 'userResourcesLocation', que por defecto está configurada como "unset".
-9. Reemplaza 'unset' con el enlace al código que copiaste anteriormente.
+8. Busca la clave `userResourcesLocation`, que por defecto está configurada como `unset`
+9. Reemplaza `unset` con el enlace al código que copiaste anteriormente.
 10. Guarda los cambios.
 
 Una vez realizados estos pasos, el bloqueador de anuncios para Twitch estará instalado en el navegador y listo para funcionar.
 
-Si deseas desactivar el script puedes volver a poner en `'unset'` la regla `'userResourcesLocation'` y opcionalmente remover el parámetro `'twitch.tv##+js(twitch-videoad)'` de la sección "Mis Filtros".
+Si deseas desactivar el script puedes volver a poner en `unset` la regla `userResourcesLocation` y opcionalmente remover el parámetro `twitch.tv##+js(twitch-videoad)` de la sección "Mis Filtros".
 Y guarda los cambios de ambas secciones.
 
 ## Modificaciones adicionales
