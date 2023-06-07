@@ -78,7 +78,7 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 3. Copia el enlace de la nueva ventana que muestra el código.
 4. Abre tu navegador y accede a la configuración de uBlock Origin.
 5. Ve a la sección de configuración avanzada.
-6. Asegúrate de tener habilitada la opción `Soy un usuario avanzado`.
+6. Asegúrate de tener habilitada la opción `Soy un usuario avanzado`
 7. Haz clic en el botón de configuración.
 8. Busca la clave `userResourcesLocation`, que por defecto está configurada como `unset`
 9. Reemplaza `unset` con el enlace al código que copiaste anteriormente.
