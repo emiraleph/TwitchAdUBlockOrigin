@@ -1,5 +1,10 @@
-www.twitch.tv##.crbrgc.Layout-sc-1xcs6mc-0 > div > .bTKXKk.ibtYyW.ScCoreButtonSecondary-sc-ocjdkq-2.ScCoreButton-sc-ocjdkq-0
+twitch.tv##+js(twitch-videoad)
+www.twitch.tv##.prime-offers.bZVrjx.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 .dVOhMf.InjectLayout-sc-1i43xsx-0 .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0 > .bxQRSJ.ButtonIconFigure-sc-1emm8lf-0 > .tw-svg.jNDIBh.ScFigure-sc-wkgzod-0 > svg
+www.twitch.tv##.prime-offers.bZVrjx.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 .dVOhMf.InjectLayout-sc-1i43xsx-0 .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0 > .bxQRSJ.ButtonIconFigure-sc-1emm8lf-0 > .tw-svg.jNDIBh.ScFigure-sc-wkgzod-0 path
 www.twitch.tv##.prime-offers.bZVrjx.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 .dVOhMf.InjectLayout-sc-1i43xsx-0 .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0
+www.twitch.tv##.crbrgc.Layout-sc-1xcs6mc-0 > div > .bTKXKk.ibtYyW.ScCoreButtonSecondary-sc-ocjdkq-2.ScCoreButton-sc-ocjdkq-0
+www.twitch.tv##.gdKXDc.Layout-sc-1xcs6mc-0 > div:nth-of-type(2)
+
 ||extensions-discovery-images.twitch.tv/d4uvtfdr04uq6raoenvj7m86gdk16v/2.2.41/logo9ddb9aba-c647-4e34-900e-7b488d158a00$image
-||vod-secure.twitch.tv/_404/404_processing_320x180.png$image
 ||supervisor.ext-twitch.tv/supervisor/v1/index.html$subdocument
+||vod-secure.twitch.tv/_404/404_processing_320x180.png$image
