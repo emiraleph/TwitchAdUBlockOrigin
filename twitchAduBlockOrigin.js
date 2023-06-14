@@ -1,3 +1,4 @@
+twitch-videoad.js text/javascript
 //Twitch.tv AD blocker modified by Emir
 //This code is designed to be used in conjunction with uBlock Origin
 //And additionally it has no external links to ensure the security of users
@@ -624,10 +625,10 @@ function hookWorkerFetch() {
                     // Perform different fetch requests based on the proxy type
                     switch (proxyType) {
                         case '1':
-                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', { headers: { '': '' } });
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', { headers: { '': '' } });
                             break;
                         case '2':
-                            encodingsM3u8Response = await realFetch('aHR0cHM6Ly9qaWdnbGUuYmV5cGF6YXJpZ3VydXN1LndvcmtlcnMuZGV2' + CurrentChannelName + '.m3u8?allow_source=true');
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8?allow_source=true');
                             break;
                     }
     
@@ -647,7 +648,7 @@ function hookWorkerFetch() {
                 var accessToken = await accessTokenResponse.json();
     
                 try {
-                    var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + CurrentChannelName + '.m3u8' + UsherParams);
+                    var urlInfo = new URL('' + CurrentChannelName + '.m3u8' + UsherParams);
                     urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                     urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                     var encodingsM3u8Response = await realFetch(urlInfo.href);
@@ -831,7 +832,7 @@ function hookWorkerFetch() {
             }
         }
         
-return fetchFunc('https://gql.twitch.tv/gql', {             // Make an HTTP POST request to the URL determined by fetchFunc
+return fetchFunc('', {             // Make an HTTP POST request to the URL determined by fetchFunc
     method: 'POST',                // Specify the request method as POST
     body: JSON.stringify(body),    // Convert the body parameter to a JSON string
     headers: {                     // Set the request headers
