@@ -627,7 +627,7 @@ function hookWorkerFetch() {
                             encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', { headers: { '': '' } });
                             break;
                         case '2':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8?allow_source=true');
+                            encodingsM3u8Response = await realFetch('aHR0cHM6Ly9qaWdnbGUuYmV5cGF6YXJpZ3VydXN1LndvcmtlcnMuZGV2' + CurrentChannelName + '.m3u8?allow_source=true');
                             break;
                     }
     
@@ -831,7 +831,7 @@ function hookWorkerFetch() {
             }
         }
         
-return fetchFunc('', {             // Make an HTTP POST request to the URL determined by fetchFunc
+return fetchFunc('https://gql.twitch.tv/gql', {             // Make an HTTP POST request to the URL determined by fetchFunc
     method: 'POST',                // Specify the request method as POST
     body: JSON.stringify(body),    // Convert the body parameter to a JSON string
     headers: {                     // Set the request headers
