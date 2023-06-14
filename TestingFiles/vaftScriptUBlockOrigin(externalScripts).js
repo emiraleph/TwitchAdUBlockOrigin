@@ -451,7 +451,7 @@ twitch-videoad.js text/javascript
         if (!params) {
             params = [ 'token', 'sig' ];
         }
-        var tempUrl = new URL('https://localhost/' + str);
+        var tempUrl = new URL('' + str);
         for (var i = 0; i < params.length; i++) {
             tempUrl.searchParams.delete(params[i]);
         }
