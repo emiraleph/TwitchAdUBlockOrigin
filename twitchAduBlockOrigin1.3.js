@@ -223,7 +223,7 @@ twitch-videoad.js text/javascript
                                         var accessTokenResponse = await getAccessToken(channelName, OPT_BACKUP_PLAYER_TYPE, OPT_BACKUP_PLATFORM, realFetch);
                                         if (accessTokenResponse != null && accessTokenResponse.status === 200) {
                                             var accessToken = await accessTokenResponse.json();
-                                            var urlInfo = new URL('' + channelName + '.m3u8' + (new URL(url)).search);
+                                            var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + channelName + '.m3u8' + (new URL(url)).search);
                                             urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                                             urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                                             encodingsUrl = urlInfo.href;
@@ -318,7 +318,7 @@ twitch-videoad.js text/javascript
             //throw 'ClientIntegrityHeader is null';
         }
         var fetchFunc = realFetch ? realFetch : fetch;
-        return fetchFunc('', {
+        return fetchFunc('https://gql.twitch.tv/gql', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -459,6 +459,9 @@ twitch-videoad.js text/javascript
         };
     }
     function reloadTwitchPlayer(isSeek, isPausePlay) {
+        // Taken from ttv-tools / ffz
+        // https://github.com/Nerixyz/ttv-tools/blob/master/src/context/twitch-player.ts
+        // https://github.com/FrankerFaceZ/FrankerFaceZ/blob/master/src/sites/twitch-twilight/modules/player.jsx
         function findReactNode(root, constraint) {
             if (root.stateNode && constraint(root.stateNode)) {
                 return root.stateNode;
@@ -528,6 +531,8 @@ twitch-videoad.js text/javascript
     window.reloadTwitchPlayer = reloadTwitchPlayer;
     hookFetch();
     function onContentLoaded() {
+        // This stops Twitch from pausing the player when in another tab and an ad shows.
+        // Taken from https://github.com/saucettv/VideoAdBlockForTwitch/blob/cefce9d2b565769c77e3666ac8234c3acfe20d83/chrome/content.js#L30
         try {
             Object.defineProperty(document, 'visibilityState', {
                 get() {
