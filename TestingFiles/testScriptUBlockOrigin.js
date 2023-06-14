@@ -513,14 +513,12 @@
                 try {
                     var proxyType = TwitchAdblockSettings.ProxyType ? TwitchAdblockSettings.ProxyType : DefaultProxyType;
                     var encodingsM3u8Response = null;
-                    /*var tempUrl = stripUnusedParams(MainUrlByUrl[url]);
-                    const match = /(hls|vod)\/(.+?)$/gim.exec(tempUrl);*/
                     switch (proxyType) {
-                        case 'TTV LOL':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/, {headers: {'': ''}});
+                        case '1':
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'': ''}});
                             break;
-                        case 'Falan':
-                            encodingsM3u8Response = await realFetch(atob('') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/);
+                        case '2':
+                            encodingsM3u8Response = await realFetch(atob('') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue');
                             break;
                     }
                     if (encodingsM3u8Response && encodingsM3u8Response.status === 200) {
