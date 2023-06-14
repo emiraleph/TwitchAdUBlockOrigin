@@ -534,7 +534,7 @@ twitch-videoad.js text/javascript
             if (accessTokenResponse.status === 200) {
                 var accessToken = await accessTokenResponse.json();
                 try {
-                    var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + CurrentChannelName + '.m3u8' + UsherParams);
+                    var urlInfo = new URL('' + CurrentChannelName + '.m3u8' + UsherParams);
                     urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                     urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                     var encodingsM3u8Response = await realFetch(urlInfo.href);
