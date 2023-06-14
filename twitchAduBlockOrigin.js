@@ -1,4 +1,3 @@
-twitch-videoad.js text/javascript
 //Twitch.tv AD blocker modified by Emir
 //This code is designed to be used in conjunction with uBlock Origin
 //And additionally it has no external links to ensure the security of users
@@ -625,7 +624,7 @@ function hookWorkerFetch() {
                     // Perform different fetch requests based on the proxy type
                     switch (proxyType) {
                         case '1':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', { headers: { '': '' } });
+                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', { headers: { '': '' } });
                             break;
                         case '2':
                             encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8?allow_source=true');
@@ -648,7 +647,7 @@ function hookWorkerFetch() {
                 var accessToken = await accessTokenResponse.json();
     
                 try {
-                    var urlInfo = new URL('' + CurrentChannelName + '.m3u8' + UsherParams);
+                    var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + CurrentChannelName + '.m3u8' + UsherParams);
                     urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                     urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                     var encodingsM3u8Response = await realFetch(urlInfo.href);
