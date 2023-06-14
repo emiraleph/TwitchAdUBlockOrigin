@@ -517,12 +517,12 @@ twitch-videoad.js text/javascript
                     /*var tempUrl = stripUnusedParams(MainUrlByUrl[url]);
                     const match = /(hls|vod)\/(.+?)$/gim.exec(tempUrl);*/
                     switch (proxyType) {
-                        case 'TTV LOL':
+                        case '1':
                             encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/, {headers: {'': ''}});
                             break;
                         /*case 'Purple Adblock':// Broken...
                             encodingsM3u8Response = await realFetch('' + CurrentChannelName);*/
-                        case 'Falan':
+                        case '2':
                             encodingsM3u8Response = await realFetch(atob('aHR0cHM6Ly9qaWdnbGUuYmV5cGF6YXJpZ3VydXN1LndvcmtlcnMuZGV2') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/);
                             break;
                     }
