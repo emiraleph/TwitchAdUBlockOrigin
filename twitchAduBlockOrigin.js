@@ -1,3 +1,4 @@
+twitch-videoad.js text/javascript
 //Twitch.tv AD blocker modified by Emir
 //This code is designed to be used in conjunction with uBlock Origin
 //And additionally it has no external links to ensure the security of users
