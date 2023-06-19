@@ -515,10 +515,10 @@
                     var encodingsM3u8Response = null;
                     switch (proxyType) {
                         case '1':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'': ''}});
+                            encodingsM3u8Response = await realFetch('https://api.ttv.lol/playlist/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', {headers: {'': ''}});
                             break;
                         case '2':
-                            encodingsM3u8Response = await realFetch(atob('') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue');
+                            encodingsM3u8Response = await realFetch(atob('aHR0cHM6Ly9qaWdnbGUuYmV5cGF6YXJpZ3VydXN1LndvcmtlcnMuZGV2') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue');
                             break;
                     }
                     if (encodingsM3u8Response && encodingsM3u8Response.status === 200) {
