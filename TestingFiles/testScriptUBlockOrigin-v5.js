@@ -451,7 +451,7 @@ twitch-videoad.js text/javascript
         if (!params) {
             params = [ 'token', 'sig' ];
         }
-        var tempUrl = new URL('' + str);
+        var tempUrl = new URL('https://localhost/' + str);
         for (var i = 0; i < params.length; i++) {
             tempUrl.searchParams.delete(params[i]);
         }
@@ -520,8 +520,9 @@ twitch-videoad.js text/javascript
                         case 'TTV LOL':
                             encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/, {headers: {'': ''}});
                             break;
-                        
-                        case 'Falan':
+                        /*case 'Purple Adblock':// Broken...
+                            encodingsM3u8Response = await realFetch('https://eu1.jupter.ga/channel/' + CurrentChannelName);*/
+                        case 'Falan':// https://greasyfork.org/en/scripts/425139-twitch-ad-fix/code
                             encodingsM3u8Response = await realFetch(atob('') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/);
                             break;
                     }
@@ -535,7 +536,7 @@ twitch-videoad.js text/javascript
             if (accessTokenResponse.status === 200) {
                 var accessToken = await accessTokenResponse.json();
                 try {
-                    var urlInfo = new URL('' + CurrentChannelName + '.m3u8' + UsherParams);
+                    var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + CurrentChannelName + '.m3u8' + UsherParams);
                     urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                     urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                     var encodingsM3u8Response = await realFetch(urlInfo.href);
