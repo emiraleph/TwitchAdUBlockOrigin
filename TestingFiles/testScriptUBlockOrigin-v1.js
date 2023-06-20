@@ -673,7 +673,7 @@ twitch-videoad.js text/javascript
                 GQLDeviceID += dcharacters.charAt(Math.floor(Math.random() * dcharactersLength));
             }
         }
-        return fetchFunc('https://gql.twitch.tv/gql', {
+        return fetchFunc('', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
