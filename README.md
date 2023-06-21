@@ -14,6 +14,7 @@ Enjoy your favorite Twitch streams without annoying ads and have greater control
 - No additional codes or encrypted links: The project is transparent and does not contain any additional codes or encrypted links.
 - Open source: The source code is openly available, allowing you to contribute or make modifications according to your needs.
 - Compatible with Firefox and LibreWolf: The ad blocker is compatible with Firefox and LibreWolf browsers.
+- The script uses the twitch API to get a lower quality stream (using the video thumbnail) and gets the audio file to allow you to continue listening to the stream without problems. 
 
 ## Mandatory Requirements
 
@@ -63,6 +64,7 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 - Sin códigos adicionales o enlaces encriptados: El proyecto es transparente y no contiene ningún código adicional ni enlaces encriptados.
 - Open source: El código fuente está disponible de forma abierta y puedes contribuir o realizar modificaciones según tus necesidades.
 - Compatible con Firefox y LibreWolf: El bloqueador de anuncios es compatible con los navegadores Firefox y LibreWolf.
+- El script usa la API de Twitch para obtener un stream de menor calidad (Usando el video miniatura) y obtiene el archivo de audio para permitirte seguir oyendo el stream sin problemas.
 
 ## Requisitos Obligatorios
 
