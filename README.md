@@ -29,7 +29,8 @@ Enjoy your favorite Twitch streams without annoying ads and have greater control
 1. Open the `twitchAduBlockOrigin.js` file on GitHub.
 2. Click the `Raw` button.
 3. Copy the link from the new window displaying the code.
-   Or just copy this path `https://raw.githubusercontent.com/emiraleph/TwitchAdUBlockOrigin/main/twitchAduBlockOrigin.js`
+- Or just copy this path:
+- `https://raw.githubusercontent.com/emiraleph/TwitchAdUBlockOrigin/main/twitchAduBlockOrigin.js`
 4. Open your browser and access the uBlock Origin settings.
 5. Go to the advanced configuration section.
 6. Ensure that the `I am an advanced user` option is enabled.
@@ -79,7 +80,8 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 1. Abre el archivo `twitchAduBlockOrigin.js` en GitHub.
 2. Haz clic en el botón `Raw`
 3. Copia el enlace de la nueva ventana que muestra el código.
-   O solo copia esta ruta `https://raw.githubusercontent.com/emiraleph/TwitchAdUBlockOrigin/main/twitchAduBlockOrigin.js`
+- O solo copia esta ruta
+- `https://raw.githubusercontent.com/emiraleph/TwitchAdUBlockOrigin/main/twitchAduBlockOrigin.js`
 4. Abre tu navegador y accede a la configuración de uBlock Origin.
 5. Ve a la sección de configuración avanzada.
 6. Asegúrate de tener habilitada la opción `Soy un usuario avanzado`
