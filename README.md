@@ -50,7 +50,8 @@ For further customization and additional features, you can refer to the [additio
 
 Additionally, uBlock Origin provides a convenient feature where you can manually select and block specific elements by right-clicking and using the uBlock Origin shortcut. This gives you the flexibility to add or block elements according to your preferences.
 
-Feel free to explore the [additionalTweaks](additionalTweaks) file and customize your Twitch ad-blocking experience.
+Feel free to explore the [additionalTweaks](additionalTweaks) Along with the other files in the repository, and customize your Twitch ad-blocking experience.
+I hope this tool will be useful.
 * Disclaimer: The rules provided are the ones I use, but you can create your own using the element-blocking function mentioned earlier.
 
 #
@@ -80,7 +81,7 @@ Disfruta de tus transmisiones favoritas en Twitch sin molestias publicitarias y 
 1. Abre el archivo `twitchAduBlockOrigin.js` en GitHub.
 2. Haz clic en el botón `Raw`
 3. Copia el enlace de la nueva ventana que muestra el código.
-- O solo copia esta ruta
+- O solo copia la siguiente ruta:
 - `https://raw.githubusercontent.com/emiraleph/TwitchAdUBlockOrigin/main/twitchAduBlockOrigin.js`
 4. Abre tu navegador y accede a la configuración de uBlock Origin.
 5. Ve a la sección de configuración avanzada.
@@ -100,5 +101,6 @@ Para una mayor personalización y características adicionales, puedes consultar
 
 Además, uBlock Origin proporciona una función conveniente donde puedes seleccionar y bloquear manualmente elementos específicos haciendo clic derecho y utilizando el atajo de uBlock Origin. Esto te brinda la flexibilidad de agregar o bloquear elementos según tus preferencias.
 
-Siéntete libre de explorar el archivo [additionalTweaks](additionalTweaks) y personalizar tu experiencia de bloqueo de anuncios en Twitch.
+Siéntete libre de explorar el archivo [additionalTweaks](additionalTweaks) junto a los demas archivos del repositorio y personalizar tu experiencia de bloqueo de anuncios en Twitch.
+Espero sea de utilidad esta herramienta.
 * Disclaimer: las reglas que se proporcionan son las que uso yo, pero puedes crear las tuyas con la funcion de bloquear elementos mencionada antes.
