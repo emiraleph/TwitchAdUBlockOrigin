@@ -1,45 +1,34 @@
 twitch-videoad.js text/javascript
-//Twitch.tv AD blocker modified by Emir
-//This code is designed to be used in conjunction with uBlock Origin
-//And additionally it has no external links to ensure the security of users
 (function() {
-    // Check if we are on the Twitch domain
-    if (/(^|\.)twitch\.tv$/.test(document.location.hostname) === false) {
-        return; // Exit the function if we are not on Twitch
-    }
+    if ( /(^|\.)twitch\.tv$/.test(document.location.hostname) === false ) { return; }
+    //This stops Twitch from pausing the player when in another tab and an ad shows.
     try {
-        // Configure the 'visibilityState' property of the document
         Object.defineProperty(document, 'visibilityState', {
             get() {
                 return 'visible';
             }
         });
-        // Configure the 'hidden' property of the document
         Object.defineProperty(document, 'hidden', {
             get() {
                 return false;
             }
         });
-        // Block events to prevent ad playback
         const block = e => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
         };
-        // Process events for specific tasks
         const process = e => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
-            // Perform the specific task on the Twitch player
+            //This corrects the background tab buffer bug when switching to the background tab for the first time after an extended period.
             doTwitchPlayerTask(false, false, true, false, false);
         };
-        // Add blocking to events related to document visibility
         document.addEventListener('visibilitychange', block, true);
         document.addEventListener('webkitvisibilitychange', block, true);
         document.addEventListener('mozvisibilitychange', block, true);
         document.addEventListener('hasFocus', block, true);
-        // Configure the 'mozHidden' or 'webkitHidden' property based on the browser
         if (/Firefox/.test(navigator.userAgent)) {
             Object.defineProperty(document, 'mozHidden', {
                 get() {
@@ -54,6 +43,7 @@ twitch-videoad.js text/javascript
             });
         }
     } catch (err) {}
+    //Send settings updates to worker.
     window.addEventListener('message', (event) => {
         if (event.source != window) {
             return;
@@ -62,30 +52,30 @@ twitch-videoad.js text/javascript
             TwitchAdblockSettings = event.data.settings;
         }
     }, false);
-
     function declareOptions(scope) {
-        scope.AdSignifier = 'stitched';                         // Set 'AdSignifier' property to 'stitched'
-        scope.ClientID = 'kimne78kx3ncx6brgo4mv6wki5h1ko';      // Set 'ClientID' property
-        scope.ClientVersion = 'null';                           // Set 'ClientVersion' property to 'null'
-        scope.ClientSession = 'null';                           // Set 'ClientSession' property to 'null'
-        scope.PlayerType2 = 'autoplay';                         // Set 'PlayerType2' property to 'autoplay'
-        scope.PlayerType3 = 'embed';                            // Set 'PlayerType3' property to 'embed'
-        scope.CurrentChannelName = null;                        // Set 'CurrentChannelName' property to null
-        scope.UsherParams = null;                               // Set 'UsherParams' property to null
-        scope.WasShowingAd = false;                             // Set 'WasShowingAd' property to false
-        scope.GQLDeviceID = null;                               // Set 'GQLDeviceID' property to null
-        scope.IsSquadStream = false;                            // Set 'IsSquadStream' property to false
-        scope.StreamInfos = [];                                 // Set 'StreamInfos' property to an empty array
-        scope.StreamInfosByUrl = [];                            // Set 'StreamInfosByUrl' property to an empty array
-        scope.MainUrlByUrl = [];                                // Set 'MainUrlByUrl' property to an empty array
-        scope.EncodingCacheTimeout = 60000;                     // Set 'EncodingCacheTimeout' property to 60000 you can set another timeOut delay
-        scope.DefaultProxyType = null;                          // Set 'DefaultProxyType' property to null
-        scope.DefaultForcedQuality = null;                      // Set 'DefaultForcedQuality' property to null
-        scope.DefaultProxyQuality = null;                       // Set 'DefaultProxyQuality' property to null
-        scope.ClientIntegrityHeader = null;                     // Set 'ClientIntegrityHeader' property to null
-        scope.AuthorizationHeader = null;                       // Set 'AuthorizationHeader' property to null
+        scope.AdSignifier = 'stitched';
+        scope.ClientID = 'kimne78kx3ncx6brgo4mv6wki5h1ko';
+        scope.ClientVersion = 'null';
+        scope.ClientSession = 'null';
+        //scope.PlayerType1 = 'site'; //Source - NOTE: This is unused as it's implicitly used by the website iself
+        scope.PlayerType2 = 'autoplay'; //360p
+        scope.PlayerType3 = 'embed'; //Source
+        //scope.PlayerType4 = 'embed'; //Source
+        scope.CurrentChannelName = null;
+        scope.UsherParams = null;
+        scope.WasShowingAd = false;
+        scope.GQLDeviceID = null;
+        scope.IsSquadStream = false;
+        scope.StreamInfos = [];
+        scope.StreamInfosByUrl = [];
+        scope.MainUrlByUrl = [];
+        scope.EncodingCacheTimeout = 60000;
+        scope.DefaultProxyType = null;
+        scope.DefaultForcedQuality = null;
+        scope.DefaultProxyQuality = null;
+        scope.ClientIntegrityHeader = null;
+        scope.AuthorizationHeader = null;
     }
-    
     declareOptions(window);
     var TwitchAdblockSettings = {
         BannerVisible: true,
@@ -109,19 +99,18 @@ twitch-videoad.js text/javascript
                 super(twitchBlobUrl);
                 return;
             }
-            // Injected functions
             var newBlobStr = `
-                ${getStreamUrlForResolution.toString()}         // Concatenating the string representation of the function 'getStreamUrlForResolution'
-                ${getStreamForResolution.toString()}            // Concatenating the string representation of the function 'getStreamForResolution'
-                ${stripUnusedParams.toString()}                 // Concatenating the string representation of the function 'stripUnusedParams'
-                ${processM3U8.toString()}                       // Concatenating the string representation of the function 'processM3U8'
-                ${hookWorkerFetch.toString()}                   // Concatenating the string representation of the function 'hookWorkerFetch'
-                ${declareOptions.toString()}                    // Concatenating the string representation of the function 'declareOptions'
-                ${getAccessToken.toString()}                    // Concatenating the string representation of the function 'getAccessToken'
-                ${gqlRequest.toString()}                        // Concatenating the string representation of the function 'gqlRequest'
-                ${adRecordgqlPacket.toString()}                 // Concatenating the string representation of the function 'adRecordgqlPacket'
-                ${tryNotifyTwitch.toString()}                   // Concatenating the string representation of the function 'tryNotifyTwitch'
-                ${parseAttributes.toString()}                   // Concatenating the string representation of the function 'parseAttributes'
+                ${getStreamUrlForResolution.toString()}
+                ${getStreamForResolution.toString()}
+                ${stripUnusedParams.toString()}
+                ${processM3U8.toString()}
+                ${hookWorkerFetch.toString()}
+                ${declareOptions.toString()}
+                ${getAccessToken.toString()}
+                ${gqlRequest.toString()}
+                ${adRecordgqlPacket.toString()}
+                ${tryNotifyTwitch.toString()}
+                ${parseAttributes.toString()}
                 declareOptions(self);
                 self.TwitchAdblockSettings = ${JSON.stringify(TwitchAdblockSettings)};
                 self.addEventListener('message', function(e) {
@@ -144,12 +133,8 @@ twitch-videoad.js text/javascript
                 hookWorkerFetch();
                 importScripts('${jsURL}');
             `;
-
-             // Create a new blob URL with the modified code
             super(URL.createObjectURL(new Blob([newBlobStr])));
-             // Set twitchMainWorker to the current instance
             twitchMainWorker = this;
-            // Handle message events for displaying/hiding ad block banner
             this.onmessage = function(e) {
                 if (e.data.key == 'ShowAdBlockBanner') {
                     if (!TwitchAdblockSettings.BannerVisible) {
@@ -168,20 +153,11 @@ twitch-videoad.js text/javascript
                 } else if (e.data.key == 'PauseResumePlayer') {
                     doTwitchPlayerTask(true, false, false, false, false);
                 } else if (e.data.key == 'ForceChangeQuality') {
-        /**
-        This code block performs the following functionality:
-
-        It attempts to return immediately using the 'return' statement
-        It invokes the 'doTwitchPlayerTask' function to retrieve the auto quality and current quality of the Twitch player
-        It initializes the global variables 'IsPlayerAutoQuality' and 'OriginalVideoPlayerQuality' if they are null
-        It checks if the current quality does not include '360' or if the provided value is not null
-        If the original video player quality does not include '360', it attempts to access the settings menu and select the quality menu
-        It retrieves the low quality options and selects the second-to-last option
-        If the provided value is not null and includes 'original', it assigns the original video player quality to the value
-        If the player is set to auto quality, it assigns the value 'auto' to the provided value
-        */
+                    //This is used to fix the bug where the video would freeze.
                     try {
+                        //if (navigator.userAgent.toLowerCase().indexOf('firefox') == -1) {
                             return;
+                        //}
                         var autoQuality = doTwitchPlayerTask(false, false, false, true, false);
                         var currentQuality = doTwitchPlayerTask(false, true, false, false, false);
                         if (IsPlayerAutoQuality == null) {
@@ -210,15 +186,6 @@ twitch-videoad.js text/javascript
                                                     if (IsPlayerAutoQuality) {
                                                         e.data.value = 'auto';
                                                     }
-        /**
-        It checks the provided value and assigns the appropriate quality level to the 'qualityToSelect' variable
-        If the value includes '160p', the quality level 5 is assigned
-        If the value includes '360p', the quality level 4 is assigned
-        If the value includes '480p', the quality level 3 is assigned
-        If the value includes '720p', '822p', '864p', '900p', '936p', '960p', or '1080p', the quality level 2 is assigned
-        If the value includes 'source', the quality level 1 is assigned
-        If the value includes 'auto', the quality level 0 is assigned
-        */
                                                 }
                                                 if (e.data.value.includes('160p')) {
                                                     qualityToSelect = 5;
@@ -277,18 +244,8 @@ twitch-videoad.js text/javascript
                     }
                 }
             };
-
-        /**
-        This function retrieves the ad block div element from the video player
-        It performs the following steps:
-
-        Finds the root div element of the video player with the class 'video-player'
-        Checks if the ad block div element is present within the player root div
-        If found, assigns the reference to the 'adBlockDiv' variable
-        If not found, creates a new ad block div element, sets its class and inner HTML, and appends it to the player root div
-        Returns the reference to the ad block div element
-        */
             function getAdBlockDiv() {
+                //To display a notification to the user, that an ad is being blocked.
                 var playerRootDiv = document.querySelector('.video-player');
                 var adBlockDiv = null;
                 if (playerRootDiv != null) {
@@ -306,123 +263,105 @@ twitch-videoad.js text/javascript
             }
         }
     };
-    // This function retrieves the URL of the WebAssembly worker script from the Twitch blob URL.
-function getWasmWorkerUrl(twitchBlobUrl) {
-    var req = new XMLHttpRequest();
-    req.open('GET', twitchBlobUrl, false);
-    req.send();
-    return req.responseText.split("'")[1]; // Extracts the WebAssembly worker URL from the response text
-}
-
-// This function hooks into the fetch function to intercept and process requests made by the Twitch player.
-function hookWorkerFetch() {
-    console.log('Twitch adblocker is enabled');
-    var realFetch = fetch; // Stores the original fetch function
-
-    // Overrides the global fetch function with a new async function
-    fetch = async function(url, options) {
-        if (typeof url === 'string') {
-            if (url.includes('video-weaver')) { // Checks if it's a video request
-                return new Promise(function(resolve, reject) {
-                    // Creates a Promise to handle the request and process the M3U8 response
-                    var processAfter = async function(response) {
-                        var responseText = await response.text();
-                        var weaverText = null;
-
-                        // Processes the M3U8 response using the 'processM3U8' function
-                        weaverText = await processM3U8(url, responseText, realFetch, PlayerType2);
-
-                        if (weaverText.includes(AdSignifier)) {
-                            // If the processed text contains the 'AdSignifier', process again with 'PlayerType3'
-                            weaverText = await processM3U8(url, responseText, realFetch, PlayerType3);
-                        }
-
-                        resolve(new Response(weaverText)); // Resolves the Promise with the processed response
-                    };
-
-                    var send = function() {
-                        return realFetch(url, options).then(function(response) {
-                            processAfter(response);
-                        }).catch(function(err) {
-                            reject(err);
-                        });
-                    };
-
-                    send();
-                });
-            } else if (url.includes('/api/channel/hls/')) { // Checks if it's a channel request
-                var channelName = (new URL(url)).pathname.match(/([^\/]+)(?=\.\w+$)/)[0];
-                UsherParams = (new URL(url)).search;
-                CurrentChannelName = channelName;
-
-                return new Promise(function(resolve, reject) {
-                    // Creates a Promise to handle the request and process the M3U8 response
-                    var processAfter = async function(response) {
-                        if (response.status == 200) {
-                            var encodingsM3u8 = await response.text();
-                            var streamInfo = StreamInfos[channelName];
-
-                            if (streamInfo == null) {
-                                StreamInfos[channelName] = streamInfo = {};
+    function getWasmWorkerUrl(twitchBlobUrl) {
+        var req = new XMLHttpRequest();
+        req.open('GET', twitchBlobUrl, false);
+        req.send();
+        return req.responseText.split("'")[1];
+    }
+    function hookWorkerFetch() {
+        console.log('Twitch adblocker is enabled');
+        var realFetch = fetch;
+        fetch = async function(url, options) {
+            if (typeof url === 'string') {
+                if (url.includes('video-weaver')) {
+                    return new Promise(function(resolve, reject) {
+                        var processAfter = async function(response) {
+                            //Here we check the m3u8 for any ads and also try fallback player types if needed.
+                            var responseText = await response.text();
+                            var weaverText = null;
+                            weaverText = await processM3U8(url, responseText, realFetch, PlayerType2);
+                            if (weaverText.includes(AdSignifier)) {
+                                weaverText = await processM3U8(url, responseText, realFetch, PlayerType3);
                             }
-
-                            streamInfo.ChannelName = channelName;
-                            streamInfo.Urls = [];
-                            streamInfo.EncodingsM3U8Cache = [];
-                            streamInfo.EncodingsM3U8 = encodingsM3u8;
-
-                            // Parses the M3U8 response and stores relevant information in StreamInfos and related objects
-                            var lines = encodingsM3u8.replace('\r', '').split('\n');
-                            for (var i = 0; i < lines.length; i++) {
-                                if (!lines[i].startsWith('#') && lines[i].includes('.m3u8')) {
-                                    streamInfo.Urls[lines[i]] = -1;
-
-                                    if (i > 0 && lines[i - 1].startsWith('#EXT-X-STREAM-INF')) {
-                                        var attributes = parseAttributes(lines[i - 1]);
-                                        var resolution = attributes['RESOLUTION'];
-                                        var frameRate = attributes['FRAME-RATE'];
-
-                                        if (resolution) {
-                                            streamInfo.Urls[lines[i]] = {
-                                                Resolution: resolution,
-                                                FrameRate: frameRate
-                                            };
-                                        }
-                                    }
-                                    StreamInfosByUrl[lines[i]] = streamInfo;
-                                    MainUrlByUrl[lines[i]] = url;
+                            //if (weaverText.includes(AdSignifier)) {
+                            //    weaverText = await processM3U8(url, responseText, realFetch, PlayerType4);
+                            //}
+                            resolve(new Response(weaverText));
+                        };
+                        var send = function() {
+                            return realFetch(url, options).then(function(response) {
+                                processAfter(response);
+                            })['catch'](function(err) {
+                                reject(err);
+                            });
+                        };
+                        send();
+                    });
+                } else if (url.includes('/api/channel/hls/')) {
+                    var channelName = (new URL(url)).pathname.match(/([^\/]+)(?=\.\w+$)/)[0];
+                    UsherParams = (new URL(url)).search;
+                    CurrentChannelName = channelName;
+                    //To prevent pause/resume loop for mid-rolls.
+                    var isPBYPRequest = url.includes('picture-by-picture');
+                    if (isPBYPRequest) {
+                        url = '';
+                    }
+                    return new Promise(function(resolve, reject) {
+                        var processAfter = async function(response) {
+                            if (response.status == 200) {
+                                encodingsM3u8 = await response.text();
+                                var streamInfo = StreamInfos[channelName];
+                                if (streamInfo == null) {
+                                    StreamInfos[channelName] = streamInfo = {};
                                 }
+                                streamInfo.ChannelName = channelName;
+                                streamInfo.Urls = [];// xxx.m3u8 -> { Resolution: "284x160", FrameRate: 30.0 }
+                                streamInfo.EncodingsM3U8Cache = [];
+                                streamInfo.EncodingsM3U8 = encodingsM3u8;
+                                var lines = encodingsM3u8.replace('\r', '').split('\n');
+                                for (var i = 0; i < lines.length; i++) {
+                                    if (!lines[i].startsWith('#') && lines[i].includes('.m3u8')) {
+                                        streamInfo.Urls[lines[i]] = -1;
+                                        if (i > 0 && lines[i - 1].startsWith('#EXT-X-STREAM-INF')) {
+                                            var attributes = parseAttributes(lines[i - 1]);
+                                            var resolution = attributes['RESOLUTION'];
+                                            var frameRate = attributes['FRAME-RATE'];
+                                            if (resolution) {
+                                                streamInfo.Urls[lines[i]] = {
+                                                    Resolution: resolution,
+                                                    FrameRate: frameRate
+                                                };
+                                            }
+                                        }
+                                        StreamInfosByUrl[lines[i]] = streamInfo;
+                                        MainUrlByUrl[lines[i]] = url;
+                                    }
+                                }
+                                resolve(new Response(encodingsM3u8));
+                            } else {
+                                resolve(response);
                             }
-
-                            resolve(new Response(encodingsM3u8)); // Resolves the Promise with the response
-                        } else {
-                            resolve(response);
-                        }
-                    };
-
-                    var send = function() {
-                        return realFetch(url, options).then(function(response) {
-                            processAfter(response);
-                        }).catch(function(err) {
-                            reject(err);
-                        });
-                    };
-
-                    send();
-                });
+                        };
+                        var send = function() {
+                            return realFetch(url, options).then(function(response) {
+                                processAfter(response);
+                            })['catch'](function(err) {
+                                reject(err);
+                            });
+                        };
+                        send();
+                    });
+                }
             }
-        }
             return realFetch.apply(this, arguments);
         };
     }
     function getStreamUrlForResolution(encodingsM3u8, resolutionInfo, qualityOverrideStr) {
         var qualityOverride = 0;
-        
-        // If a quality override string is provided and it ends with 'p', extract the quality override value
         if (qualityOverrideStr && qualityOverrideStr.endsWith('p')) {
             qualityOverride = qualityOverrideStr.substr(0, qualityOverrideStr.length - 1) | 0;
         }
-        
         var qualityOverrideFoundQuality = 0;
         var qualityOverrideFoundFrameRate = 0;
         var encodingsLines = encodingsM3u8.replace('\r', '').split('\n');
@@ -430,41 +369,35 @@ function hookWorkerFetch() {
         var lastUrl = null;
         var matchedResolutionUrl = null;
         var matchedFrameRate = false;
-        
         for (var i = 0; i < encodingsLines.length; i++) {
             if (!encodingsLines[i].startsWith('#') && encodingsLines[i].includes('.m3u8')) {
                 if (i > 0 && encodingsLines[i - 1].startsWith('#EXT-X-STREAM-INF')) {
                     var attributes = parseAttributes(encodingsLines[i - 1]);
                     var resolution = attributes['RESOLUTION'];
                     var frameRate = attributes['FRAME-RATE'];
-                    
                     if (resolution) {
                         if (qualityOverride) {
                             var quality = resolution.toLowerCase().split('x')[1];
-                            
-                            // If the quality matches the quality override value
                             if (quality == qualityOverride) {
                                 qualityOverrideFoundQuality = quality;
                                 qualityOverrideFoundFrameRate = frameRate;
                                 matchedResolutionUrl = encodingsLines[i];
-                                
-                                // If the frame rate is less than 40, return the matched resolution URL
                                 if (frameRate < 40) {
+                                    //console.log(`qualityOverride(A) quality:${quality} frameRate:${frameRate}`);
                                     return matchedResolutionUrl;
                                 }
-                            }
-                            // If the quality is less than the quality override value, return the matched resolution URL (if any)
-                            else if (quality < qualityOverride) {
+                            } else if (quality < qualityOverride) {
+                                //if (matchedResolutionUrl) {
+                                //    console.log(`qualityOverride(B) quality:${qualityOverrideFoundQuality} frameRate:${qualityOverrideFoundFrameRate}`);
+                                //} else {
+                                //    console.log(`qualityOverride(C) quality:${quality} frameRate:${frameRate}`);
+                                //}
                                 return matchedResolutionUrl ? matchedResolutionUrl : encodingsLines[i];
                             }
-                        }
-                        // If no quality override is specified
-                        else if ((!resolutionInfo || resolution == resolutionInfo.Resolution) &&
-                                 (!matchedResolutionUrl || (!matchedFrameRate && frameRate == resolutionInfo.FrameRate))) {
+                        } else if ((!resolutionInfo || resolution == resolutionInfo.Resolution) &&
+                                   (!matchedResolutionUrl || (!matchedFrameRate && frameRate == resolutionInfo.FrameRate))) {
                             matchedResolutionUrl = encodingsLines[i];
                             matchedFrameRate = frameRate == resolutionInfo.FrameRate;
-                            
-                            // If the frame rate matches, return the matched resolution URL
                             if (matchedFrameRate) {
                                 return matchedResolutionUrl;
                             }
@@ -473,7 +406,6 @@ function hookWorkerFetch() {
                     if (firstUrl == null) {
                         firstUrl = encodingsLines[i];
                     }
-                    
                     lastUrl = encodingsLines[i];
                 }
             }
@@ -485,119 +417,82 @@ function hookWorkerFetch() {
     }
     async function getStreamForResolution(streamInfo, resolutionInfo, encodingsM3u8, fallbackStreamStr, playerType, realFetch) {
         var qualityOverride = null;
-    
-        // Determine the quality override based on the player type (proxy or default)
         if (playerType === 'proxy') {
             qualityOverride = TwitchAdblockSettings.ProxyQuality ? TwitchAdblockSettings.ProxyQuality : DefaultProxyQuality;
         }
-    
-        // Check if the encodings cache needs to be updated or if ads should be blocked
         if (streamInfo.EncodingsM3U8Cache[playerType].Resolution != resolutionInfo.Resolution ||
             streamInfo.EncodingsM3U8Cache[playerType].RequestTime < Date.now() - EncodingCacheTimeout) {
-            console.log(`Blocking ads (type: ${playerType}, resolution: ${resolutionInfo.Resolution}, frameRate: ${resolutionInfo.FrameRate}, qualityOverride: ${qualityOverride})`);
+            console.log(`Blocking ads (type:${playerType}, resolution:${resolutionInfo.Resolution}, frameRate:${resolutionInfo.FrameRate}, qualityOverride:${qualityOverride})`);
         }
-    
-        // Update the encodings cache with the current request time and values
         streamInfo.EncodingsM3U8Cache[playerType].RequestTime = Date.now();
         streamInfo.EncodingsM3U8Cache[playerType].Value = encodingsM3u8;
         streamInfo.EncodingsM3U8Cache[playerType].Resolution = resolutionInfo.Resolution;
-    
-        // Get the stream M3U8 URL for the specified resolution and quality override
         var streamM3u8Url = getStreamUrlForResolution(encodingsM3u8, resolutionInfo, qualityOverride);
-    
-        // Fetch the stream M3U8 file using the realFetch function
         var streamM3u8Response = await realFetch(streamM3u8Url);
-    
         if (streamM3u8Response.status == 200) {
-            // If the response status is 200 (OK), process the M3U8 text
             var m3u8Text = await streamM3u8Response.text();
-    
-            // Set the flag indicating that an ad was shown
             WasShowingAd = true;
-    
-            // Send messages to show the ad block banner and force a quality change
-            postMessage({ key: 'ShowAdBlockBanner' });
-            postMessage({ key: 'ForceChangeQuality' });
-    
-            // If the M3U8 text is empty or contains the ad signifier, clear the encodings cache value
+            postMessage({
+                key: 'ShowAdBlockBanner'
+            });
+            postMessage({
+                key: 'ForceChangeQuality'
+            });
             if (!m3u8Text || m3u8Text.includes(AdSignifier)) {
                 streamInfo.EncodingsM3U8Cache[playerType].Value = null;
             }
-    
             return m3u8Text;
         } else {
-            // If the response status is not 200, clear the encodings cache value and return the fallback stream
             streamInfo.EncodingsM3U8Cache[playerType].Value = null;
             return fallbackStreamStr;
         }
     }
     function stripUnusedParams(str, params) {
-        // If params is not provided, use default values
         if (!params) {
-            params = ['token', 'sig'];
+            params = [ 'token', 'sig' ];
         }
-    
-        // Create a temporary URL object from the string
         var tempUrl = new URL('' + str);
-    
-        // Delete the specified parameters from the URL's search params
         for (var i = 0; i < params.length; i++) {
             tempUrl.searchParams.delete(params[i]);
         }
-    
-        // Return the updated URL string without the deleted params
         return tempUrl.pathname.substring(1) + tempUrl.search;
     }
-    
     async function processM3U8(url, textStr, realFetch, playerType) {
+        //Checks the m3u8 for ads and if it finds one, instead returns an ad-free stream.
         var streamInfo = StreamInfosByUrl[url];
-    
-        // If it's a squad stream, return the text as is
+        //Ad blocking for squad streams is disabled due to the way multiple weaver urls are used. No workaround so far.
         if (IsSquadStream == true) {
             return textStr;
         }
-    
-        // If the text is empty, return it as is
         if (!textStr) {
             return textStr;
         }
-    
-        // If the text doesn't contain '.ts' or '.mp4', return it as is
+        //Some live streams use mp4.
         if (!textStr.includes('.ts') && !textStr.includes('.mp4')) {
             return textStr;
         }
-    
-        // Check if the text has ad tags
         var haveAdTags = textStr.includes(AdSignifier);
-    
         if (haveAdTags) {
             var isMidroll = textStr.includes('"MIDROLL"') || textStr.includes('"midroll"');
-    
-            // If it's not a midroll ad, perform some action (try-catch block is empty)
+            //Reduces ad frequency. TODO: Reduce the number of requests. This is really spamming Twitch with requests.
             if (!isMidroll) {
                 try {
-                    // TODO: Add code here
-                } catch (err) {
-                    // TODO: Add error handling here
-                }
+                    //tryNotifyTwitch(textStr);
+                } catch (err) {}
             }
-    
             var currentResolution = null;
-    
-            // Get the current resolution info from the streamInfo object
             if (streamInfo && streamInfo.Urls) {
                 for (const [resUrl, resInfo] of Object.entries(streamInfo.Urls)) {
                     if (resUrl == url) {
                         currentResolution = resInfo;
+                        //console.log(resInfo.Resolution);
                         break;
                     }
                 }
             }
-    
+            // Keep the m3u8 around for a little while (once per ad) before requesting a new one
             var encodingsM3U8Cache = streamInfo.EncodingsM3U8Cache[playerType];
-    
             if (encodingsM3U8Cache) {
-                // Check if the encodings cache is valid and retrieve the stream for the current resolution
                 if (encodingsM3U8Cache.Value && encodingsM3U8Cache.RequestTime >= Date.now() - EncodingCacheTimeout) {
                     try {
                         var result = getStreamForResolution(streamInfo, currentResolution, encodingsM3U8Cache.Value, null, playerType, realFetch);
@@ -609,59 +504,48 @@ function hookWorkerFetch() {
                     }
                 }
             } else {
-                // Initialize the encodings cache if it doesn't exist
                 streamInfo.EncodingsM3U8Cache[playerType] = {
                     RequestTime: Date.now(),
                     Value: null,
                     Resolution: null
                 };
             }
-    
             if (playerType === 'proxy') {
                 try {
                     var proxyType = TwitchAdblockSettings.ProxyType ? TwitchAdblockSettings.ProxyType : DefaultProxyType;
                     var encodingsM3u8Response = null;
-    
-                    // Perform different fetch requests based on the proxy type
+                    /*var tempUrl = stripUnusedParams(MainUrlByUrl[url]);
+                    const match = /(hls|vod)\/(.+?)$/gim.exec(tempUrl);*/
                     switch (proxyType) {
-                        case '1':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue', { headers: { '': '' } });
+                        case 'TTV LOL':
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/, {headers: {'': ''}});
                             break;
-                        case '2':
-                            encodingsM3u8Response = await realFetch('' + CurrentChannelName + '.m3u8?allow_source=true');
+                      /*case 'Purple Adblock':// Broken...
+                            encodingsM3u8Response = await realFetch('' + CurrentChannelName);*/
+                        case 'Falan'://
+                            encodingsM3u8Response = await realFetch(atob('') + '/hls/' + CurrentChannelName + '.m3u8%3Fallow_source%3Dtrue'/* + encodeURIComponent(match[2])*/);
                             break;
                     }
-    
                     if (encodingsM3u8Response && encodingsM3u8Response.status === 200) {
                         return getStreamForResolution(streamInfo, currentResolution, await encodingsM3u8Response.text(), textStr, playerType, realFetch);
                     }
-                } catch (err) {
-                    // TODO: Add error handling here
-                }
-    
+                } catch (err) {}
                 return textStr;
             }
-    
             var accessTokenResponse = await getAccessToken(CurrentChannelName, playerType);
-    
             if (accessTokenResponse.status === 200) {
                 var accessToken = await accessTokenResponse.json();
-    
                 try {
-                    var urlInfo = new URL('' + CurrentChannelName + '.m3u8' + UsherParams);
+                    var urlInfo = new URL('https://usher.ttvnw.net/api/channel/hls/' + CurrentChannelName + '.m3u8' + UsherParams);
                     urlInfo.searchParams.set('sig', accessToken.data.streamPlaybackAccessToken.signature);
                     urlInfo.searchParams.set('token', accessToken.data.streamPlaybackAccessToken.value);
                     var encodingsM3u8Response = await realFetch(urlInfo.href);
-    
                     if (encodingsM3u8Response.status === 200) {
                         return getStreamForResolution(streamInfo, currentResolution, await encodingsM3u8Response.text(), textStr, playerType, realFetch);
                     } else {
                         return textStr;
                     }
-                } catch (err) {
-                    // TODO: Add error handling here
-                }
-    
+                } catch (err) {}
                 return textStr;
             } else {
                 return textStr;
@@ -670,8 +554,7 @@ function hookWorkerFetch() {
             if (WasShowingAd) {
                 console.log('Finished blocking ads');
                 WasShowingAd = false;
-    
-                // Send messages to force a quality change, pause/resume player, and hide the ad block banner
+                //Here we put player back to original quality and remove the blocking message.
                 postMessage({
                     key: 'ForceChangeQuality',
                     value: 'original'
@@ -683,55 +566,43 @@ function hookWorkerFetch() {
                     key: 'HideAdBlockBanner'
                 });
             }
-    
             return textStr;
         }
-    
         return textStr;
     }
-    
     function parseAttributes(str) {
-        // Split the string into key-value pairs and convert it into an object
         return Object.fromEntries(
             str.split(/(?:^|,)((?:[^=]*)=(?:"[^"]*"|[^,]*))/)
-                .filter(Boolean)
-                .map(x => {
-                    const idx = x.indexOf('=');
-                    const key = x.substring(0, idx);
-                    const value = x.substring(idx + 1);
-                    const num = Number(value);
-                    return [key, Number.isNaN(num) ? value.startsWith('"') ? JSON.parse(value) : value : num];
-                })
-        );
+            .filter(Boolean)
+            .map(x => {
+                const idx = x.indexOf('=');
+                const key = x.substring(0, idx);
+                const value = x.substring(idx + 1);
+                const num = Number(value);
+                return [key, Number.isNaN(num) ? value.startsWith('"') ? JSON.parse(value) : value : num];
+            }));
     }
     async function tryNotifyTwitch(streamM3u8) {
-        // Match the stitched ad in the streamM3u8 string
+        //We notify that an ad was requested but was not visible and was also muted.
         var matches = streamM3u8.match(/#EXT-X-DATERANGE:(ID="stitched-ad-[^\n]+)\n/);
-        // Check if there is a match
         if (matches.length > 1) {
-            // Extract relevant attributes from the matched string
-                const attrString = matches[1];
-                const attr = parseAttributes(attrString);
-                var podLength = parseInt(attr['X-TV-TWITCH-AD-POD-LENGTH'] ? attr['X-TV-TWITCH-AD-POD-LENGTH'] : '1');
-                var podPosition = parseInt(attr['X-TV-TWITCH-AD-POD-POSITION'] ? attr['X-TV-TWITCH-AD-POD-POSITION'] : '0');
-                var radToken = attr['X-TV-TWITCH-AD-RADS-TOKEN'];
-                var lineItemId = attr['X-TV-TWITCH-AD-LINE-ITEM-ID'];
-                var orderId = attr['X-TV-TWITCH-AD-ORDER-ID'];
-                var creativeId = attr['X-TV-TWITCH-AD-CREATIVE-ID'];
-                var adId = attr['X-TV-TWITCH-AD-ADVERTISER-ID'];
-                var rollType = attr['X-TV-TWITCH-AD-ROLL-TYPE'].toLowerCase();
-
-                 // Create a base data object with the extracted attributes
-                const baseData = {
-                    stitched: true,
-                    roll_type: rollType,
-                    player_mute: true,
-                    player_volume: 0.0,
-                    visible: false,
-                    // Additional attributes can be added here
+            const attrString = matches[1];
+            const attr = parseAttributes(attrString);
+            var podLength = parseInt(attr['X-TV-TWITCH-AD-POD-LENGTH'] ? attr['X-TV-TWITCH-AD-POD-LENGTH'] : '1');
+            var podPosition = parseInt(attr['X-TV-TWITCH-AD-POD-POSITION'] ? attr['X-TV-TWITCH-AD-POD-POSITION'] : '0');
+            var radToken = attr['X-TV-TWITCH-AD-RADS-TOKEN'];
+            var lineItemId = attr['X-TV-TWITCH-AD-LINE-ITEM-ID'];
+            var orderId = attr['X-TV-TWITCH-AD-ORDER-ID'];
+            var creativeId = attr['X-TV-TWITCH-AD-CREATIVE-ID'];
+            var adId = attr['X-TV-TWITCH-AD-ADVERTISER-ID'];
+            var rollType = attr['X-TV-TWITCH-AD-ROLL-TYPE'].toLowerCase();
+            const baseData = {
+                stitched: true,
+                roll_type: rollType,
+                player_mute: true,
+                player_volume: 0.0,
+                visible: false,
             };
-            // Perform further actions with the baseData object
-            // ...
             for (let podPosition = 0; podPosition < podLength; podPosition++) {
                 const extendedData = {
                     ...baseData,
@@ -756,16 +627,6 @@ function hookWorkerFetch() {
             }
         }
     }
-
-    /**
-    * Function to generate the adRecord GraphQL packet.
-    *
-    * @param {string} event     - Event name.
-    * @param {string} radToken  - RAD token.
-    * @param {object} payload   - Event payload.
-    * @returns {array}          - Array containing the adRecord GraphQL packet.
-    */
-
     function adRecordgqlPacket(event, radToken, payload) {
         return [{
             operationName: 'ClientSideAdEventHandling_RecordAdEvent',
@@ -784,16 +645,6 @@ function hookWorkerFetch() {
             },
         }];
     }
-
-    /**
-    * Function to get the access token.
-    *
-    * @param {string} channelName   - Channel name.
-    * @param {string} playerType    - Player type.
-    * @param {function} realFetch   - Real HTTP request function.
-    * @returns {Promise}            - Promise that resolves with the access token.
-    */
-
     function getAccessToken(channelName, playerType, realFetch) {
         var body = null;
         var templateQuery = 'query PlaybackAccessToken_Template($login: String!, $isLive: Boolean!, $vodID: ID!, $isVod: Boolean!, $playerType: String!) {  streamPlaybackAccessToken(channelName: $login, params: {platform: "ios", playerBackend: "mediaplayer", playerType: $playerType}) @include(if: $isLive) {    value    signature    __typename  }  videoPlaybackAccessToken(id: $vodID, params: {platform: "ios", playerBackend: "mediaplayer", playerType: $playerType}) @include(if: $isVod) {    value    signature    __typename  }}';
@@ -810,18 +661,10 @@ function hookWorkerFetch() {
         };
         return gqlRequest(body, realFetch);
     }
-
-    /**
-
-    Function to make a GraphQL request.
-    @param {Object} body        - The request body.
-    @param {function} realFetch - Real HTTP request function.
-    @returns {Promise}          - Promise that resolves with the response of the request.
-    */
-
     function gqlRequest(body, realFetch) {
         if (ClientIntegrityHeader == null) {
             console.warn('ClientIntegrityHeader is null');
+            //throw 'ClientIntegrityHeader is null';
         }
         var fetchFunc = realFetch ? realFetch : fetch;
         if (!GQLDeviceID) {
@@ -831,266 +674,216 @@ function hookWorkerFetch() {
                 GQLDeviceID += dcharacters.charAt(Math.floor(Math.random() * dcharactersLength));
             }
         }
-        
-return fetchFunc('', {             // Make an HTTP POST request to the URL determined by fetchFunc
-    method: 'POST',                // Specify the request method as POST
-    body: JSON.stringify(body),    // Convert the body parameter to a JSON string
-    headers: {                     // Set the request headers
-        'Client-ID': ClientID,                      // Include the Client-ID header
-        'Client-Integrity': ClientIntegrityHeader,  // Include the Client-Integrity header
-        'Device-ID': GQLDeviceID,                   // Include the Device-ID header
-        'X-Device-Id': GQLDeviceID,                 // Include the X-Device-Id header
-        'Client-Version': ClientVersion,            // Include the Client-Version header
-        'Client-Session-Id': ClientSession,         // Include the Client-Session-Id header
-        'Authorization': AuthorizationHeader        // Include the Authorization header
+        return fetchFunc('https://gql.twitch.tv/gql', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Client-ID': ClientID,
+                'Client-Integrity': ClientIntegrityHeader,
+                'Device-ID': GQLDeviceID,
+                'X-Device-Id': GQLDeviceID,
+                'Client-Version': ClientVersion,
+                'Client-Session-Id': ClientSession,
+                'Authorization': AuthorizationHeader
             }
         });
     }
-
-    /**
- * Perform various tasks related to the Twitch player.
- *
- * @param {boolean} isPausePlay     - Indicates whether to pause and play the player.
- * @param {boolean} isCheckQuality  - Indicates whether to check the video quality.
- * @param {boolean} isCorrectBuffer - Indicates whether to correct the video buffer.
- * @param {boolean} isAutoQuality   - Indicates whether to enable or disable auto quality mode.
- * @param {boolean} setAutoQuality  - Indicates whether to set auto quality mode.
- */
-function doTwitchPlayerTask(isPausePlay, isCheckQuality, isCorrectBuffer, isAutoQuality, setAutoQuality) {
-    try {
-        var videoController = null;
-        var videoPlayer = null;
-
-        // Function to find the React node based on a constraint
-        function findReactNode(root, constraint) {
-            if (root.stateNode && constraint(root.stateNode)) {
-                return root.stateNode;
-            }
-            let node = root.child;
-            while (node) {
-                const result = findReactNode(node, constraint);
-                if (result) {
-                    return result;
-                }
-                node = node.sibling;
-            }
-            return null;
-        }
-
-        var reactRootNode = null;
-        var rootNode = document.querySelector('#root');
-
-        // Find the React root node
-        if (rootNode && rootNode._reactRootContainer && rootNode._reactRootContainer._internalRoot && rootNode._reactRootContainer._internalRoot.current) {
-            reactRootNode = rootNode._reactRootContainer._internalRoot.current;
-        }
-
-        // Find the video player instance
-        videoPlayer = findReactNode(reactRootNode, node => node.setPlayerActive && node.props && node.props.mediaPlayerInstance);
-        videoPlayer = videoPlayer && videoPlayer.props && videoPlayer.props.mediaPlayerInstance ? videoPlayer.props.mediaPlayerInstance : null;
-
-        if (isPausePlay) {
-            // Pause and play the video player
-            videoPlayer.pause();
-            videoPlayer.play();
-            return;
-        }
-
-        if (isCheckQuality) {
-            // Check the video quality
-            if (typeof videoPlayer.getQuality() == 'undefined') {
-                return;
-            }
-            var playerQuality = JSON.stringify(videoPlayer.getQuality());
-            if (playerQuality) {
-                return playerQuality;
-            } else {
-                return;
-            }
-        }
-
-        if (isAutoQuality) {
-            // Enable or disable auto quality mode
-            if (typeof videoPlayer.isAutoQualityMode() == 'undefined') {
-                return false;
-            }
-            var autoQuality = videoPlayer.isAutoQualityMode();
-            if (autoQuality) {
-                videoPlayer.setAutoQualityMode(false);
-                return autoQuality;
-            } else {
-                return false;
-            }
-        }
-
-        if (setAutoQuality) {
-            // Set auto quality mode
-            videoPlayer.setAutoQualityMode(true);
-            return;
-        }
-
+    function doTwitchPlayerTask(isPausePlay, isCheckQuality, isCorrectBuffer, isAutoQuality, setAutoQuality) {
+        //This will do an instant pause/play to return to original quality once the ad is finished.
+        //We also use this function to get the current video player quality set by the user.
+        //We also use this function to quickly pause/play the player when switching tabs to stop delays.
         try {
-            var currentPageURL = document.URL;
-            var isLive = true;
-
-            // Check if the current page is a video or clip page
-            if (currentPageURL.includes('videos/') || currentPageURL.includes('clip/')) {
-                isLive = false;
-            }
-
-            if (isCorrectBuffer && isLive) {
-                // Correct the video buffer for low latency or high latency
-                setTimeout(function() {
-                    if (videoPlayer.isLiveLowLatency() && videoPlayer.getLiveLatency() > 5) {
-                        videoPlayer.pause();
-                        videoPlayer.play();
-                    } else if (videoPlayer.getLiveLatency() > 15) {
-                        videoPlayer.pause();
-                        videoPlayer.play();
-                    }
-                }, 3000);
-            }
-        } catch (err) {}
-    } catch (err) {}
-}
-/**
- * This block of code performs various operations related to fetching and modifying requests.
- * It includes the following functionalities:
- * - Retrieves the local device ID from local storage.
- * - Hooks into the `fetch` function to intercept and modify requests.
- * - Updates certain values and headers in the intercepted requests based on specific conditions.
- * - Communicates with the `twitchMainWorker` to send updates related to device ID, client version, client session, client ID, client integrity header, and authorization header.
- * - Modifies the request body for specific conditions.
- * - Handles requests containing 'picture-by-picture'.
- */
-var localDeviceID = null;
-localDeviceID = window.localStorage.getItem('local_copy_unique_id');
-
-/**
- * Function to hook into the `fetch` function and intercept requests.
- */
-function hookFetch() {
-    var realFetch = window.fetch;
-    window.fetch = function(url, init, ...args) {
-        if (typeof url === 'string') {
-            // Check if the current URL contains '/squad' and update the 'isSquadStream' flag accordingly
-            if (window.location.pathname.includes('/squad')) {
-                if (twitchMainWorker) {
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateIsSquadStream',
-                        value: true
-                    });
+            var videoController = null;
+            var videoPlayer = null;
+            function findReactNode(root, constraint) {
+                if (root.stateNode && constraint(root.stateNode)) {
+                    return root.stateNode;
                 }
-            } else {
-                if (twitchMainWorker) {
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateIsSquadStream',
-                        value: false
-                    });
+                let node = root.child;
+                while (node) {
+                    const result = findReactNode(node, constraint);
+                    if (result) {
+                        return result;
+                    }
+                    node = node.sibling;
+                }
+                return null;
+            }
+            var reactRootNode = null;
+            var rootNode = document.querySelector('#root');
+            if (rootNode && rootNode._reactRootContainer && rootNode._reactRootContainer._internalRoot && rootNode._reactRootContainer._internalRoot.current) {
+                reactRootNode = rootNode._reactRootContainer._internalRoot.current;
+            }
+            videoPlayer = findReactNode(reactRootNode, node => node.setPlayerActive && node.props && node.props.mediaPlayerInstance);
+            videoPlayer = videoPlayer && videoPlayer.props && videoPlayer.props.mediaPlayerInstance ? videoPlayer.props.mediaPlayerInstance : null;
+            if (isPausePlay) {
+                videoPlayer.pause();
+                videoPlayer.play();
+                return;
+            }
+            if (isCheckQuality) {
+                if (typeof videoPlayer.getQuality() == 'undefined') {
+                    return;
+                }
+                var playerQuality = JSON.stringify(videoPlayer.getQuality());
+                if (playerQuality) {
+                    return playerQuality;
+                } else {
+                    return;
                 }
             }
-
-            // Update values and headers based on specific conditions in the request
-            if (url.includes('/access_token') || url.includes('gql')) {
-                var deviceId = init.headers['X-Device-Id'];
-                if (typeof deviceId !== 'string') {
-                    deviceId = init.headers['Device-ID'];
+            if (isAutoQuality) {
+                if (typeof videoPlayer.isAutoQualityMode() == 'undefined') {
+                    return false;
                 }
-
-                // Update the GQLDeviceID based on the device ID header
-                if (typeof deviceId === 'string' && !deviceId.includes('twitch-web-wall-mason')) {
-                    GQLDeviceID = deviceId;
-                } else if (localDeviceID) {
-                    GQLDeviceID = localDeviceID.replace('"', '');
-                    GQLDeviceID = GQLDeviceID.replace('"', '');
+                var autoQuality = videoPlayer.isAutoQualityMode();
+                if (autoQuality) {
+                    videoPlayer.setAutoQualityMode(false);
+                    return autoQuality;
+                } else {
+                    return false;
                 }
-
-                // Update the X-Device-Id and Device-ID headers in the request
-                if (GQLDeviceID && twitchMainWorker) {
-                    if (typeof init.headers['X-Device-Id'] === 'string') {
-                        init.headers['X-Device-Id'] = GQLDeviceID;
-                    }
-                    if (typeof init.headers['Device-ID'] === 'string') {
-                        init.headers['Device-ID'] = GQLDeviceID;
-                    }
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateDeviceId',
-                        value: GQLDeviceID
-                    });
+            }
+            if (setAutoQuality) {
+                videoPlayer.setAutoQualityMode(true);
+                return;
+            }
+            //This only happens when switching tabs and is to correct the high latency caused when opening background tabs and going to them at a later time.
+            //We check that this is a live stream by the page URL, to prevent vod/clip pause/plays.
+            try {
+                var currentPageURL = document.URL;
+                var isLive = true;
+                if (currentPageURL.includes('videos/') || currentPageURL.includes('clip/')) {
+                    isLive = false;
                 }
-
-                // Update the ClientVersion header in the request
-                var clientVersion = init.headers['Client-Version'];
-                if (clientVersion && typeof clientVersion == 'string') {
-                    ClientVersion = clientVersion;
-                }
-                if (ClientVersion && twitchMainWorker) {
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateClientVersion',
-                        value: ClientVersion
-                    });
-                }
-
-                // Update the ClientSession header in the request
-                var clientSession = init.headers['Client-Session-Id'];
-                if (clientSession && typeof clientSession == 'string') {
-                    ClientSession = clientSession;
-                }
-                if (ClientSession && twitchMainWorker) {
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateClientSession',
-                        value: ClientSession
-                    });
-                }
-
-                // Update the ClientID, ClientIntegrityHeader, and AuthorizationHeader based on the request body
-                if (url.includes('gql') && init && typeof init.body === 'string' && init.body.includes('PlaybackAccessToken')) {
-                    var clientId = init.headers['Client-ID'];
-                    if (clientId && typeof clientId == 'string') {
-                        ClientID = clientId;
-                    } else {
-                        clientId = init.headers['Client-Id'];
-                        if (clientId && typeof clientId == 'string') {
-                            ClientID = clientId;
+                if (isCorrectBuffer && isLive) {
+                    //A timer is needed due to the player not resuming without it.
+                    setTimeout(function() {
+                        //If latency to broadcaster is above 5 or 15 seconds upon switching tabs, we pause and play the player to reset the latency.
+                        //If latency is between 0-6, user can manually pause and resume to reset latency further.
+                        if (videoPlayer.isLiveLowLatency() && videoPlayer.getLiveLatency() > 5) {
+                            videoPlayer.pause();
+                            videoPlayer.play();
+                        } else if (videoPlayer.getLiveLatency() > 15) {
+                            videoPlayer.pause();
+                            videoPlayer.play();
                         }
-                    }
-                    if (ClientID && twitchMainWorker) {
+                    }, 3000);
+                }
+            } catch (err) {}
+        } catch (err) {}
+    }
+    var localDeviceID = null;
+    localDeviceID = window.localStorage.getItem('local_copy_unique_id');
+    function hookFetch() {
+        var realFetch = window.fetch;
+        window.fetch = function(url, init, ...args) {
+            if (typeof url === 'string') {
+                //Check if squad stream.
+                if (window.location.pathname.includes('/squad')) {
+                    if (twitchMainWorker) {
                         twitchMainWorker.postMessage({
-                            key: 'UpdateClientId',
-                            value: ClientID
+                            key: 'UpdateIsSquadStream',
+                            value: true
                         });
                     }
-
-                    ClientIntegrityHeader = init.headers['Client-Integrity'];
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateClientIntegrityHeader',
-                        value: init.headers['Client-Integrity']
-                    });
-
-                    AuthorizationHeader = init.headers['Authorization'];
-                    twitchMainWorker.postMessage({
-                        key: 'UpdateAuthorizationHeader',
-                        value: init.headers['Authorization']
-                    });
+                } else {
+                    if (twitchMainWorker) {
+                        twitchMainWorker.postMessage({
+                            key: 'UpdateIsSquadStream',
+                            value: false
+                        });
+                    }
                 }
-
-                // Modify the request body for specific conditions
-                if (url.includes('gql') && init && typeof init.body === 'string' && init.body.includes('PlaybackAccessToken') && init.body.includes('picture-by-picture')) {
-                    init.body = '';
-                }
-
-                // Handle requests containing 'picture-by-picture'
-                var isPBYPRequest = url.includes('picture-by-picture');
-                if (isPBYPRequest) {
-                    url = '';
+                if (url.includes('/access_token') || url.includes('gql')) {
+                    //Device ID is used when notifying Twitch of ads.
+                    var deviceId = init.headers['X-Device-Id'];
+                    if (typeof deviceId !== 'string') {
+                        deviceId = init.headers['Device-ID'];
+                    }
+                    //Added to prevent eventual UBlock conflicts.
+                    if (typeof deviceId === 'string' && !deviceId.includes('twitch-web-wall-mason')) {
+                        GQLDeviceID = deviceId;
+                    } else if (localDeviceID) {
+                        GQLDeviceID = localDeviceID.replace('"', '');
+                        GQLDeviceID = GQLDeviceID.replace('"', '');
+                    }
+                    if (GQLDeviceID && twitchMainWorker) {
+                        if (typeof init.headers['X-Device-Id'] === 'string') {
+                            init.headers['X-Device-Id'] = GQLDeviceID;
+                        }
+                        if (typeof init.headers['Device-ID'] === 'string') {
+                            init.headers['Device-ID'] = GQLDeviceID;
+                        }
+                        twitchMainWorker.postMessage({
+                            key: 'UpdateDeviceId',
+                            value: GQLDeviceID
+                        });
+                    }
+                    //Client version is used in GQL requests.
+                    var clientVersion = init.headers['Client-Version'];
+                    if (clientVersion && typeof clientVersion == 'string') {
+                        ClientVersion = clientVersion;
+                    }
+                    if (ClientVersion && twitchMainWorker) {
+                        twitchMainWorker.postMessage({
+                            key: 'UpdateClientVersion',
+                            value: ClientVersion
+                        });
+                    }
+                    //Client session is used in GQL requests.
+                    var clientSession = init.headers['Client-Session-Id'];
+                    if (clientSession && typeof clientSession == 'string') {
+                        ClientSession = clientSession;
+                    }
+                    if (ClientSession && twitchMainWorker) {
+                        twitchMainWorker.postMessage({
+                            key: 'UpdateClientSession',
+                            value: ClientSession
+                        });
+                    }
+                    //Client ID is used in GQL requests.
+                    if (url.includes('gql') && init && typeof init.body === 'string' && init.body.includes('PlaybackAccessToken')) {
+                        var clientId = init.headers['Client-ID'];
+                        if (clientId && typeof clientId == 'string') {
+                            ClientID = clientId;
+                        } else {
+                            clientId = init.headers['Client-Id'];
+                            if (clientId && typeof clientId == 'string') {
+                                ClientID = clientId;
+                            }
+                        }
+                        if (ClientID && twitchMainWorker) {
+                            twitchMainWorker.postMessage({
+                                key: 'UpdateClientId',
+                                value: ClientID
+                            });
+                        }
+                        //Client integrity header
+                        ClientIntegrityHeader = init.headers['Client-Integrity'];
+                        twitchMainWorker.postMessage({
+                            key: 'UpdateClientIntegrityHeader',
+                            value: init.headers['Client-Integrity']
+                        });
+                        //Authorization header
+                        AuthorizationHeader = init.headers['Authorization'];
+                        twitchMainWorker.postMessage({
+                            key: 'UpdateAuthorizationHeader',
+                            value: init.headers['Authorization']
+                        });
+                    }
+                    //To prevent pause/resume loop for mid-rolls.
+                    if (url.includes('gql') && init && typeof init.body === 'string' && init.body.includes('PlaybackAccessToken') && init.body.includes('picture-by-picture')) {
+                        init.body = '';
+                    }
+                    var isPBYPRequest = url.includes('picture-by-picture');
+                    if (isPBYPRequest) {
+                        url = '';
+                    }
                 }
             }
-        }
-        
-        // Call the original fetch function with the modified arguments
-        return realFetch.apply(this, arguments);
-    };
-}
-// Hook into the fetch function
-hookFetch();
+            return realFetch.apply(this, arguments);
+        };
+    }
+    hookFetch();
 })();
