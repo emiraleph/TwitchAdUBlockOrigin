@@ -1,10 +1,46 @@
-twitch.tv##+js(twitch-videoad)
-www.twitch.tv##.prime-offers.bZVrjx.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 .dVOhMf.InjectLayout-sc-1i43xsx-0 .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0 > .bxQRSJ.ButtonIconFigure-sc-1emm8lf-0 > .tw-svg.jNDIBh.ScFigure-sc-wkgzod-0 > svg
-www.twitch.tv##.prime-offers.bZVrjx.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 .dVOhMf.InjectLayout-sc-1i43xsx-0 .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0 > .bxQRSJ.ButtonIconFigure-sc-1emm8lf-0 > .tw-svg.jNDIBh.ScFigure-sc-wkgzod-0 path
-www.twitch.tv##.prime-offers.bZVrjx.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 .dVOhMf.InjectLayout-sc-1i43xsx-0 .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0
-www.twitch.tv##.crbrgc.Layout-sc-1xcs6mc-0 > div > .bTKXKk.ibtYyW.ScCoreButtonSecondary-sc-ocjdkq-2.ScCoreButton-sc-ocjdkq-0
-www.twitch.tv##.gdKXDc.Layout-sc-1xcs6mc-0 > div:nth-of-type(2)
+!
+!   ____             __ _          __ _ _        ____            _____           _      
+!  / ___|___  _ __  / _(_) __ _   / _(_) | ___  | __ ) _   _ _  | ____|_ __ ___ (_)_ __ 
+! | |   / _ \| '_ \| |_| |/ _` | | |_| | |/ _ \ |  _ \| | | (_) |  _| | '_ ` _ \| | '__|
+! | |__| (_) | | | |  _| | (_| | |  _| | |  __/ | |_) | |_| |_  | |___| | | | | | | |   
+!  \____\___/|_| |_|_| |_|\__, | |_| |_|_|\___| |____/ \__, (_) |_____|_| |_| |_|_|_|   
+!                         |___/                        |___/                                                     
+!
+! [ TWITCH ]
+! This parameter removes the ads displayed during Twitch streams by utilizing a local script hosted on my GitHub.
+www.twitch.tv##+js(twitch-videoad)
 
-||extensions-discovery-images.twitch.tv/d4uvtfdr04uq6raoenvj7m86gdk16v/2.2.41/logo9ddb9aba-c647-4e34-900e-7b488d158a00$image
-||supervisor.ext-twitch.tv/supervisor/v1/index.html$subdocument
-||vod-secure.twitch.tv/_404/404_processing_320x180.png$image
+
+! [ TWITCH TURBO BUTTON AND PRIME SUBSCRIPTION REMINDER DISABLED ]
+! On this code block Twitch Prime buttons and Twitch Turbo button to provide a best AD Blocking experience.
+www.twitch.tv##.crbrgc.Layout-sc-1xcs6mc-0 > div > .dVOhMf.InjectLayout-sc-1i43xsx-0 > .bTKXKk.ibtYyW.ScCoreButtonSecondary-sc-ocjdkq-2.ScCoreButton-sc-ocjdkq-0
+www.twitch.tv##.top-nav__prime.hjmDKV.Layout-sc-1xcs6mc-0
+www.twitch.tv##.featured-content-carousel__item-container--center.featured-content-carousel__item-container--offset-0.featured-content-carousel__item-container--description.featured-content-carousel__item-container
+www.twitch.tv##.front-page-carousel.iqIerE.Layout-sc-1xcs6mc-0
+d4uvtfdr04uq6raoenvj7m86gdk16v.ext-twitch.tv###root
+
+
+! [ TWITCH PRIME REMINDERS EXTENSION, DISABLED ALL CANVAS BIG AND SMALL REMINDER ]
+! This rule blocks the Twitch Prime reminders extension from appearing on the Twitch website.
+www.twitch.tv##.extensions-dock__layout.tw-root--hover.tw-root--theme-dark.hnAHCd.Layout-sc-1xcs6mc-0
+
+! This rule removes the large Twitch Prime reminders extension from the Twitch website.
+d4uvtfdr04uq6raoenvj7m86gdk16v.ext-twitch.tv##.prime-extension-root__extension--top-middle.prime-extension-root__extension
+
+
+! [ TWITCH COSMETIC BUTTONS DISABLED ]
+! This rules block some cosmetic buttons like bits and super chats
+www.twitch.tv##.fjEAlz.click-handler.InjectLayout-sc-1i43xsx-0
+www.twitch.tv##.disclosure-card.hbRBzU.Layout-sc-1xcs6mc-0
+zfh2irvx2jb4s60f02jq0ajm8vwgka.ext-twitch.tv###chests
+zfh2irvx2jb4s60f02jq0ajm8vwgka.ext-twitch.tv##.menu-container
+
+
+! [ I TRY TO REMOVE THE AGE WARNING ON +18 VIDEOS 'NO WORK' ]
+! I try to remove all of this alerts but i cant get it work properly
+www.twitch.tv##.cnsuzA.Layout-sc-1xcs6mc-0 > .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0
+www.twitch.tv##.eFscQc.Layout-sc-1xcs6mc-0 > .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0 > .bxQRSJ.ButtonIconFigure-sc-1emm8lf-0 > .tw-svg.jNDIBh.ScFigure-sc-wkgzod-0 > svg
+www.twitch.tv##.eFscQc.Layout-sc-1xcs6mc-0 > .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0 > .bxQRSJ.ButtonIconFigure-sc-1emm8lf-0 > .tw-svg.jNDIBh.ScFigure-sc-wkgzod-0
+www.twitch.tv##.eFscQc.Layout-sc-1xcs6mc-0 > .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0
+www.twitch.tv##.hXjgYR.Layout-sc-1xcs6mc-0 > .crbrgc.Layout-sc-1xcs6mc-0 > div:nth-of-type(1) > .dVOhMf.InjectLayout-sc-1i43xsx-0 > .iqxxop.ScButtonIcon-sc-9yap0r-0.ibtYyW.ScCoreButton-sc-ocjdkq-0
+
